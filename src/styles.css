@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+body {
+	background: rgba(153,153,153,.3);
+}
+
+.font-size-title {
+	font-size:24px;
+}
+
+.text-aligner {
+	text-align:center;
+}
+
+.margin-top {
+	margin-top:180px;
+}
+
+.font-color {
+	color:rgba(203,0,0,.7);
+}
+
+.auto-margin { 
+	margin:auto; 	
+}
+
+.card-title {
+	padding-top:10px;
+	font-size: 14px;
+	color: rgb(153, 153, 153)
+}
+
+.input-format {
+	color: rgba(153,153,153,.5);
+}
+
+.button-submit {
+	margin-bottom:15px;
+	width: 80px;
+	color: rgb(255, 255, 255);
+	background:rgb(203,0,0);
+	height:30px;
+	opacity: .7;
+	font-size:12px;
+	border-radius:5px;
+}
+
+.button-submit:focus {
+	outline:0 !important; 
+}
+
+.button-submit:hover {
+	cursor: pointer;
+	opacity: .8;
+	transition-duration: 0.3s;
+}
