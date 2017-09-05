@@ -4,6 +4,10 @@ body {
 	background: rgba(153,153,153,.3);
 }
 
+.card {
+	border: 1px solid rgba(153, 153, 153, .6);
+}
+
 .font-size-title {
 	font-size:24px;
 }
@@ -53,4 +57,13 @@ body {
 	cursor: pointer;
 	opacity: .8;
 	transition-duration: 0.3s;
+}
+
+.circle {
+	transform: scale(.3,.3);
+}
+
+.input-format {
+	color: rgb(153,153,153);
+	font-size: 14px;
 }
