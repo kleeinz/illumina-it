@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DataTableModule } from "angular2-datatable";
 
 //Routes
 import { APP_ROUTING } from './app.routes';
@@ -22,7 +23,8 @@ import { ClientsComponent } from './components/clients/clients.component';
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    DataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
