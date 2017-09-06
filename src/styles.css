@@ -24,6 +24,10 @@ body {
 	color:rgba(203,0,0,.7);
 }
 
+.padding-top {
+	padding-top: 10px;
+}
+
 .auto-margin { 
 	margin:auto; 	
 }
@@ -66,4 +70,44 @@ body {
 .input-format {
 	color: rgb(153,153,153);
 	font-size: 14px;
+}
+
+
+.button-submit > a {
+	text-decoration: none;
+	color: rgb(255, 255, 255);
+}
+
+.navbar {
+	background-color: rgb(255,255,255);
+	height: 50px;
+	border-bottom: 1px solid rgba(153, 153, 153, .6);
+}
+
+.nav-ul {
+	list-style: none;
+}
+
+.nav-ul li {
+	display: inline;
+	color: rgb(153, 153, 153);
+	margin-left: 10px;
+}
+
+.nav-ul li:hover {
+	color: rgb(51, 51, 51);
+	cursor: pointer;
+	transition-duration: .3s;
+}
+
+.padding-left {
+	padding-left: 10px;
+}
+
+.span-icon {
+	background-color: red;
+}
+
+.icon-user:before {
+	color: black;
 }
