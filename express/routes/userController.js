@@ -24,12 +24,11 @@ let response = {
 
 router.route('/save').get( function(req, res) {
     let user = new User();
-    user.name = "nombreX";
+    user.name = req.body;
     user.save(function(err) {
         if (err)
             res.send(err);
-        console.log("Ejecutandose");
-        res.json({ message: 'Bear created!' });
+        res.json({ message: 'User created!' });
     });
 });
 

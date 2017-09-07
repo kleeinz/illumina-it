@@ -2,9 +2,13 @@
   <div class="row">
     <p class="padding-left padding-top font-color"><strong>Test</strong>Application</p>
     <ul class="nav-ul padding-top">
-      <li routerLinkActive="active" [routerLink]="['users']">Users</li>
-      <li routerLinkActive="active" [routerLink]="['clients']">Clients</li>
+      <li [routerLink]="['users']">Users</li>
+      <li [routerLink]="['clients']">Clients</li>
     </ul>
   </div>
-  <button type="button" class="btn float-right button-user"><i class="fa fa-user"></i> Username</button>
+  <div class="user-profile-button">
+    <button type="button" class="btn float-right button-user">Username</button>
+   <!--  <span class="width-profile">username</span>
+    <span><i class="fa fa-user"></i></span> -->
+  </div>
 </nav>
