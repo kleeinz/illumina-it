@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
+import { ModalComponent } from '../shared/modals/modal.component';
+ import { DialogService } from "ng2-bootstrap-modal";
 
 @Component({
 	selector: 'users',
 	templateUrl: 'users.component.html',
 })
-export class UsersComponent implements OnInit {
-	constructor(private userService: UserService) {}
+export class UsersComponent {
+	constructor(private userService: UserService, private dialogService: DialogService) {}
 
-	ngOnInit() {
-		
-	}
-
-	public onSave(user: User):any {
-		this.userService.save(user , '').subscribe(
-			success => {
-
-			},
-
-			error => {
-				
-			}
-
-			);
-	}
+	private showConfirm() {
+            let disposable = this.dialogService.addDialog(ModalComponent, {
+                title:'Confirm title', 
+                message:'Confirm message'})
+                .subscribe( (isConfirmed) => {
+                    if(isConfirmed) {
+                       console.log("Aceppted")
+                    }
+                    else {
+                    	console.log("Declined");
+                    	disposable.unsubscribe();
+                    }
+                });
+    }
 }
