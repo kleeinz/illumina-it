@@ -138,11 +138,63 @@ body {
 .button-user {
 	color:rgb(255,255,255);
 	font-size: 14px;
-	background:rgba(203,0,0, .7);
+	background:rgb(203,0,0);
 }
 
-.button-user:hover {
-	background:rgb(203,0,0);
+.opacity {
+	opacity: .7;
+}
+
+.div-user:hover {
+	opacity: 1;
 	transition-duration: .3s;
 	cursor: pointer;
+}
+
+.error-form {
+	color: rgb(203,0,0);
+	font-size: 12px;
+}
+
+.border-left{
+	border-top-left-radius:10px;
+	border-bottom-left-radius: 10px; 
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	margin-right: 2px;
+
+}
+
+.profile-user {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.background-color { 
+ 	background:rgb(204,0,0);
+}
+
+.hover-button:hover {
+	cursor: pointer;
+	transition-duration: .3s;
+}
+
+.font-color-button {
+	color: rgb(255,255,255);
+}
+
+.font-grey-color {
+	color: rgb(255,255,255);
+}
+
+.font-red-color {
+	color: rgb(204,0,0);
+}
+
+.color-background-header{
+	background-color: rgb(0,0,0);
+}
+
+.header-height {
+	height: 60px;
 }

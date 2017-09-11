@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/Rx';
 
 @Injectable()
-export class UserService {
+export class UserService<Model> {
 
 	private headers:Headers;
 	private options:RequestOptions;
@@ -17,10 +17,10 @@ export class UserService {
 		this.serverURL = "http://localhost:3000/";
 	}
 
-	public save(dto: any, wildcard:string) {
-		console.log("Running save method in service, ", JSON.stringify(dto));
+	public save<Model>(model: Model, wildcard:string) {
+		console.log("Running save method in service, ", JSON.stringify(model));
 		return this.http.post( this.serverURL + wildcard + "/save",
-			JSON.stringify(dto), this.options )
+			JSON.stringify(model), this.options )
 		.map(this.extractData).catch(this.handleError);
 	}
 

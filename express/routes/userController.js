@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 // Connect
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://barbie:barbie@ds123534.mlab.com:23534/illuminame');
+mongoose.connect('mongodb://admin:admin@ds133094.mlab.com:33094/illuminati', { useMongoClient: true });
 
 let User = require('../models/users');
 
@@ -21,14 +21,17 @@ let response = {
     data: [],
     message: null
 };
-
-router.route('/save').get( function(req, res) {
-    let user = new User();
-    user.name = req.body;
-    user.save(function(err) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'User created!' });
+router.post('/save', (request, response) => {
+    let user = new User({
+        username: request.body.username,
+        password: request.body.password,
+        user_type: request.body.userType
+    });
+    user.save(error => {
+        if (error) response.status(500).send(error);
+        response.status(201).json({
+            message: 'User created successfully'
+        });      
     });
 });
 
