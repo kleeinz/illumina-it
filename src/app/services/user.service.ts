@@ -24,7 +24,14 @@ export class UserService<Model> {
 		.map(this.extractData).catch(this.handleError);
 	}
 
+	public find<Model>(wildcard: string): Observable<Array<Model>> {
+		console.log("Running find method in service");
+		return this.http.get(this.serverURL + wildcard + "/find")
+                    .map(this.extractData).catch(this.handleError);
+	}
+
 	private extractData(res: Response):string {
+		console.log("XXXXXXX, ", res);
 		let body = res.json();
 		return body || {};
 	}

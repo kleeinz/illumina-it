@@ -1,37 +1,40 @@
-<button type="button" class="btn btn-danger float-right margin-left warning-color">Remove User <i class="fa fa-remove"></i></button>
-<button type="button" class="btn btn-warning float-right warning-color margin-left">Edit User <i class="fa fa-edit"></i></button>
-<button (click)="showConfirm()" type="button" class="btn btn-success float-right warning-color">Add User <i class="fa fa-plus"></i></button>
+<button (click)="showConfirm()" class="btn float-right add-button">
+	Add User <i class="fa fa-plus-circle"></i>
+</button>
+<div *ngIf="users && users.length > 0">
+	<table class="table table-color format-table">
+		<thead>
+			<tr class="thead-inverse">
+				<th>Username</th>
+				<th>Password</th>
+				<th>UserType</th>
+				<th>Operations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of users">
+				<td>{{ user.username }}</td>
+				<td>{{ user.password }}</td>
+				<td>{{ user.user_type }}</td>
+				<td><i class="fa fa-edit"></i> <i class="fa fa-remove"></i></td>
+			</tr>
+	</tbody>
+</table>
+</div>
+<div *ngIf="!users || users.length < 1">
 <table class="table table-color format-table">
 	<thead>
 		<tr class="thead-inverse">
-			<th>Name</th>
-			<th>Status</th>
-			<th>Sex</th>
-			<th>Age</th>
-			<th>Proffesion</th>
+			<th>Username</th>
+			<th>Password</th>
+			<th>UserType</th>
+			<th>Operations</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>John Smith</td>
-			<td>Single</td>
-			<td>Male</td>
-			<td>29</td>
-			<td>Assassin</td>
-		</tr>
-		<tr>
-			<td>Miriam Smith</td>
-			<td>Single</td>
-			<td>Female</td>
-			<td>25</td>
-			<td>Tanker</td>
-		</tr>
-		<tr>
-			<td>Aegon Targaryen</td>
-			<td>Single</td>
-			<td>Male</td>
-			<td>29</td>
-			<td>King in the north</td>
+			<td>No display data </td>
 		</tr>
 	</tbody>
 </table>
+</div>

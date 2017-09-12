@@ -18,10 +18,6 @@ export class ModalComponent extends DialogComponent<ConfirmModel, boolean> imple
   }
 
   confirm() {
-    // we set dialog result as true on click on confirm button, 
-    // then we can get dialog result from caller code 
-    //console.log("Hello what do you do?" + JSON.stringify(this.UserFormComponent.userForm.value));
-  
     this.UserFormComponent.onSubmit(this.UserFormComponent.userForm);
   }
 }

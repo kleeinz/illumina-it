@@ -20,7 +20,7 @@ export class UserFormComponent {
             username: ['', Validators.required],
             password: ['', Validators.required],
             userType: ['', Validators.required]
-        });
+        })
     }
 
     public onSubmit(formGroup: FormGroup):any {
@@ -28,12 +28,18 @@ export class UserFormComponent {
         this.user = formGroup.value;
         this.userService.save<User>(this.user, 'userController').subscribe(
                 success => {
-                    return "User created";
+                    console.log(success.message);
+                    return success.message;
                 },
-
                 error => {
-                    return "Error Code: " + error;
+                    return error;
                 }
             );
+    }
+
+    public validatePassword() {
+        // let password = group.controls.password.value;
+        // let repeat = group.controls.repeat.value;
+        // return password === repeat ? null : { notMatch: true };
     }
 }
