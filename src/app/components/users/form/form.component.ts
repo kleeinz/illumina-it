@@ -8,8 +8,9 @@ import { UserService } from '../../../services/user.service';
 	templateUrl: 'form.component.html',
 })
 export class UserFormComponent {
-    user: User;
+    protected user: User;
     userForm: FormGroup;
+    protected message: string;
 
     constructor(private formBuilder: FormBuilder, private userService: UserService<User>) {
         this.createForm();
@@ -29,9 +30,12 @@ export class UserFormComponent {
         this.userService.save<User>(this.user, 'userController').subscribe(
                 success => {
                     console.log(success.message);
+                    this.message = success.message;
+                    console.log(this.message);
                     return success.message;
                 },
                 error => {
+                    this.message = error;
                     return error;
                 }
             );
