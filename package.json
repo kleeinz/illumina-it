@@ -29,7 +29,10 @@
     "font-awesome": "^4.7.0",
     "mongoose": "^4.11.10",
     "ng2-bootstrap": "1.1.16-10",
-    "ng2-bootstrap-modal": "^1.9.2",
+    "ng2-bs3-modal": "0.10.4",
+    "ngx-bootstrap": "1.7.1",
+    "jquery": "3.1.0",
+    "jquery-sparkline": "2.3.2",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

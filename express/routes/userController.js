@@ -50,4 +50,15 @@ router.get('/find', (request, response) => {
 
 });
 
+router.get('/find/:username', (request, response) => {
+    User.findOne({'username':request.params.username}).then(success => {
+        console.log("Getting object from the database, ", success);
+        return response.status(200).json(success);
+    }).catch(err => {
+        console.log({ err: err }, 'Unexpected Error');
+        sendError(err, response);
+    });
+
+});
+
 module.exports = router;

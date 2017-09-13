@@ -225,3 +225,31 @@ body {
 	cursor:pointer;
 	transition-duration: .3s;
 }
+
+.error-message {
+	color: rgb(203,0,0);
+}
+
+.success-message {
+	color: rgb(51, 153, 0);
+}
+
+.margin-right {
+	margin-right: 20px; 
+}
+
+.edit-icon {
+	color: rgb(255, 204, 0);
+	opacity: .7;
+}
+
+.remove-icon {
+	color: rgb(204, 0, 0);
+	opacity: .7;
+}
+
+.edit-icon:hover, .remove-icon:hover {
+	opacity: .9;
+	cursor: pointer;
+	transition-duration: .3s;
+}
