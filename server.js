@@ -3,9 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
-
+// const jwt = require('jsonwebtoken');
+// const config = ('./express/configs/config');
 // API file for interacting with MongoDB
 const api = require('./express/routes/userController');
+
+// Configuration
+// app.set('superSecret', config.secret);
 
 // Parsers
 app.use(bodyParser.json());

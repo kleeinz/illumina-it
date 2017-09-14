@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
+import { Auth } from '../models/auth.model';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -15,6 +16,12 @@ export class UserService<Model> {
 		this.headers = new Headers({ 'Content-Type': 'application/json' });
 		this.options = new RequestOptions({ headers: this.headers });
 		this.serverURL = "http://localhost:3000/";
+	}
+
+	public auth<Auth>(auth: Auth, wilcard:string) {
+		console.log("Running auth method in service, sending user data: ", auth);
+		return this.http.post(this.serverURL + wilcard + "/auth", JSON.stringify(auth), this.options)
+				   .map(this.extractData).catch(this.handleError);
 	}
 
 	public save<Model>(model: Model, wildcard:string) {
