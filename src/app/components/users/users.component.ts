@@ -22,7 +22,9 @@ export class UsersComponent implements OnInit {
 
 	openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
-      height: '350px'
+      height: '350px',
+			data: {'name': 'jorge'}
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
