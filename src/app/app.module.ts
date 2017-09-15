@@ -6,6 +6,9 @@ import { DataTableModule } from "angular2-datatable";
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserFormComponent } from './components/users/form/form.component';
+import {MdDialogModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 //Services
 import { UserService } from './services/user.service';
@@ -20,6 +23,7 @@ import { UsersComponent } from './components/users/users.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ModalComponent } from './components/shared/modals/modal.component';
+import {DialogContentExampleDialog} from './components/shared/modals/dialog-content-example-dialog';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { ModalComponent } from './components/shared/modals/modal.component';
   ClientsComponent,
   ModalComponent,
   UserFormComponent,
+  DialogContentExampleDialog,
   AppComponent
   ],
   imports: [
@@ -38,11 +43,14 @@ import { ModalComponent } from './components/shared/modals/modal.component';
   APP_ROUTING,
   HttpModule,
   CommonModule,
+  BrowserAnimationsModule,
+  MdDialogModule,
   ReactiveFormsModule,
   DataTableModule
   ],
   entryComponents: [
-  ModalComponent
+  ModalComponent,
+  DialogContentExampleDialog
   ],
   providers: [
   UserService,
