@@ -254,3 +254,11 @@ body {
 	cursor: pointer;
 	transition-duration: .3s;
 }
+
+.success-color {
+	color: green;
+}
+
+.error-color {
+	color: red;
+}

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const usersSchema = new Schema({
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
-	user_type: { type: String, required: true }
+	userType: { type: String, required: true }
 });
 
 // the schema is useless so far

@@ -3,8 +3,9 @@ import { ModalComponent } from '../shared/modals/modal.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
-import {MdDialog} from '@angular/material';
-import {DialogContentExampleDialog} from '../shared/modals/dialog-content-example-dialog';
+import { MdDialog } from '@angular/material';
+import { DialogForm } from '../shared/modals/dialogForm';
+import { ConfirmDialog } from '../shared/modals/confirmDialog';
 
 
 @Component({
@@ -20,26 +21,38 @@ export class UsersComponent implements OnInit {
 		this.populateDatatable();
 	}
 
-	openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
-      height: '350px',
-			data: {'name': 'jorge'}
+	private onSave() {
+        const dialogRef = this.dialog.open(DialogForm, {
+            height: '500px',
+            width: '400px'
+        });
 
-    });
+    }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+    private onEdit(user: User) {
+        console.log("userType", user.userType);
+        const dialogRef = this.dialog.open(DialogForm, {
+            height: '500px',
+            width: '400px',
+            data: {
+                'username': user.username,
+                'password': user.password,
+                'userType': user.userType
+            }
+        });
+    }
 
-	private showConfirm() {
-        let disposable = this.dialogService.addDialog(ModalComponent,);
+    private confirm() {
+        const dialogRef = this.dialog.open(ConfirmDialog, {
+            height: '200px',
+            width: '500px'
+        })
     }
 
     private populateDatatable():any {
     	this.userService.find<User>('userController').subscribe(success => {
     		console.log(success);
-    		this.users = success;
+    		this.users = success as User[];
     		return success;
     	}, error => {
     		console.log(error);

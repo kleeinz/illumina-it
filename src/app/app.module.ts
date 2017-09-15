@@ -23,7 +23,8 @@ import { UsersComponent } from './components/users/users.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ModalComponent } from './components/shared/modals/modal.component';
-import {DialogContentExampleDialog} from './components/shared/modals/dialog-content-example-dialog';
+import { DialogForm } from './components/shared/modals/dialogForm';
+import { ConfirmDialog } from './components/shared/modals/confirmDialog';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {DialogContentExampleDialog} from './components/shared/modals/dialog-cont
   ClientsComponent,
   ModalComponent,
   UserFormComponent,
-  DialogContentExampleDialog,
+  DialogForm,
+  ConfirmDialog,
   AppComponent
   ],
   imports: [
@@ -50,7 +52,8 @@ import {DialogContentExampleDialog} from './components/shared/modals/dialog-cont
   ],
   entryComponents: [
   ModalComponent,
-  DialogContentExampleDialog
+  DialogForm,
+  ConfirmDialog
   ],
   providers: [
   UserService,

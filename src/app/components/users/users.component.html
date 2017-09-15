@@ -1,4 +1,4 @@
-<button (click)="showConfirm()" class="btn float-right add-button">
+<button (click)="onSave()" class="btn float-right add-button">
 	Add User <i class="fa fa-plus-circle"></i>
 </button>
 <div *ngIf="users && users.length > 0">
@@ -15,8 +15,8 @@
 			<tr *ngFor="let user of users">
 				<td>{{ user.username }}</td>
 				<td>{{ user.password }}</td>
-				<td>{{ user.user_type }}</td>
-				<td><i class="fa fa-edit"></i> <i class="fa fa-remove"></i></td>
+				<td>{{ user.userType }}</td>
+				<td><i class="fa fa-edit" (click)="onEdit(user)"></i> <i class="fa fa-remove" (click)="confirm()"></i></td>
 			</tr>
 	</tbody>
 </table>
@@ -38,5 +38,3 @@
 	</tbody>
 </table>
 </div>
-
-<button md-button (click)="openDialog()">Open dialog</button>

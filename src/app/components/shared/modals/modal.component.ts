@@ -18,6 +18,6 @@ export class ModalComponent extends DialogComponent<ConfirmModel, boolean> imple
   }
 
   confirm() {
-    this.UserFormComponent.onSubmit(this.UserFormComponent.userForm);
+    this.UserFormComponent.onSave(this.UserFormComponent.userForm);
   }
 }

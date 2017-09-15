@@ -32,10 +32,11 @@ let response = {
     message: null
 };
 router.post('/save', (request, response) => {
+    console.log("UserType:   ::::::", request.body.userType);
     let user = new User({
         username: request.body.username,
         password: request.body.password,
-        user_type: request.body.userType
+        userType: request.body.userType
     });
     user.save().then(success =>  {
         console.log("The user has been created.");

@@ -10,7 +10,9 @@ import { UserService } from '../../../services/user.service';
 export class UserFormComponent {
     protected user: User;
     userForm: FormGroup;
-    protected message: string;
+    public message: string;
+    public color:String;
+    public username: string;
 
     constructor(private formBuilder: FormBuilder, private userService: UserService<User>) {
         this.createForm();
@@ -24,7 +26,7 @@ export class UserFormComponent {
         })
     }
 
-    public onSubmit(formGroup: FormGroup):any {
+    public onSave(formGroup: FormGroup):any {
         console.log(JSON.stringify(formGroup.value));
         this.user = formGroup.value;
         this.userService.save<User>(this.user, 'userController').subscribe(
@@ -32,10 +34,12 @@ export class UserFormComponent {
                     console.log(success.message);
                     this.message = success.message;
                     console.log(this.message);
+                    this.color = 'success-color';
                     return success.message;
                 },
                 error => {
                     this.message = error;
+                    this.color = 'error-color';
                     return error;
                 }
             );
