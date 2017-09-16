@@ -51,9 +51,8 @@ export class UsersComponent implements OnInit {
 
     private populateDatatable():any {
     	this.userService.find<User>('userController').subscribe(success => {
-    		console.log(success);
-    		this.users = success as User[];
-    		return success;
+    		this.users = success.data as User[];
+    		return success.data;
     	}, error => {
     		console.log(error);
     		return error;

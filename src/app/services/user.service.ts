@@ -11,7 +11,7 @@ export class UserService<Model> {
 	private headers:Headers;
 	private options:RequestOptions;
 	private serverURL:string;
-	
+
 	constructor(private http:Http) {
 		this.headers = new Headers({ 'Content-Type': 'application/json' });
 		this.options = new RequestOptions({ headers: this.headers });
@@ -31,14 +31,14 @@ export class UserService<Model> {
 		.map(this.extractData).catch(this.handleError);
 	}
 
-	public find<Model>(wildcard: string): Observable<Array<Model>> {
+	public find<Model>(wildcard: string): Observable<any> {
 		console.log("Running find method in service");
 		return this.http.get(this.serverURL + wildcard + "/find")
                     .map(this.extractData).catch(this.handleError);
 	}
 
 	private extractData(res: Response):string {
-		console.log("XXXXXXX, ", res);
+		console.log(res);
 		let body = res.json();
 		return body || {};
 	}

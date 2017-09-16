@@ -5,3 +5,4 @@ class Responser {
 		this.message = message;
 	}
 }
+module.exports = Responser;

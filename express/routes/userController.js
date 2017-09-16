@@ -1,5 +1,12 @@
 const express = require('express');
+
+//****
 const config = require('../configs/config');
+const errorSender = require('../configs/ErrorSender');
+const Responser = require('../configs/Responser');
+const status = require('../configs/StatusCodes');
+//****
+
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -16,7 +23,6 @@ mongoose.connect(config.database, { useMongoClient: true });
 
 
 let User = require('../models/users');
-
 
 // Error handling
 const sendError = (err, res) => {
@@ -40,20 +46,20 @@ router.post('/save', (request, response) => {
     });
     user.save().then(success =>  {
         console.log("The user has been created.");
-        return response.status(200).json({ 'message': 'The user has been created' });
+        return response.status(status.codes.save).json(new Responser(success, status.codes.save, 'The user has been created.'));
     }).catch(err => {
         console.log({ err: err }, 'Unexpected Error');
-        sendError(err, response);
+        return errorSender(err, response, status.codes.server);
     });
 });
 
 router.get('/find', (request, response) => {
     User.find().then(success => {
         console.log("Getting all objects from the database, ", success);
-        return response.status(200).json(success);
+        return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'Getting all objects from the database.'));
     }).catch(err => {
         console.log({ err: err }, 'Unexpected Error');
-        sendError(err, response);
+        return errorSender(err, response, status.codes.server);
     });
 
 
@@ -62,10 +68,10 @@ router.get('/find', (request, response) => {
 router.get('/find/:username', (request, response) => {
     User.findOne({'username':request.params.username}).then(success => {
         console.log("Getting object from the database, ", success);
-        return response.status(200).json(success);
+        return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'Getting object from the database.'));
     }).catch(err => {
         console.log({ err: err }, 'Unexpected Error');
-        sendError(err, response);
+        return errorSender(err, response, status.codes.server);
     });
 
 });
@@ -73,21 +79,20 @@ router.get('/find/:username', (request, response) => {
 router.post('/auth', (request, response) => {
     User.findOne({'username': request.body.username, 'password': request.body.password })
         .then(success => {
-            if (!success) 
-                return response.status(404).json({'message': 'Username doesn´t exist in the database'});
-
+            if (!success)
+                return response.status(status.codes.notFound).json(new Responser(success, status.codes.notFound, 'Username doesn´t exist in the database.'));
             console.log("APP: " + app.get('superSecret'));
             let token = jwt.sign({
-                exp: Math.floor(Date.now() / 1000) + (60 * 60 * 6),
+                exp: 60,
                 data: request.body.username
             }, app.get('superSecret'));
 
 
             console.log("Authenticating user in the system", success);
-            return response.status(200).json({ 
-                'message': 'Accessing to the system', 
+            return response.status(200).json({
+                'message': 'Accessing to the system',
                 'username': request.body.username,
-                'token': token 
+                'token': token
             });
         }).catch(err => {
             console.log({ err: err }, 'Unable to login');
