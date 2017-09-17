@@ -14,6 +14,7 @@ import { ConfirmDialog } from '../shared/modals/confirmDialog';
 })
 export class UsersComponent implements OnInit {
 	private users: Array<User>;
+	private filterInput:string;
 
 	constructor(public dialog: MdDialog, private dialogService: DialogService, private genericService: GenericService<User>) {}
 
