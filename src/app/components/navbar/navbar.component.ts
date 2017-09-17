@@ -6,10 +6,14 @@ import { AuthService } from '../../services/auth.service';
 	templateUrl: 'navbar.component.html',
 })
 export class NavBarComponent implements OnInit {
+	private username: String;
 	constructor(private authService: AuthService) {}
 
 	ngOnInit() {
-
+		console.log('User: ', this.authService.user);
+		if(!this.authService.user)
+				this.username = 'Username';
+		this.username = this.authService.user.username;
 	}
 
 	public logout():void {
