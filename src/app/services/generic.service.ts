@@ -30,6 +30,12 @@ export class GenericService<Model> {
                     .map(this.extractData).catch(this.handleError);
 	}
 
+	public delete<Model>(model: Model, wilcard:string) {
+		console.log("Running delete method in service", JSON.stringify(model));
+		return this.http.post(this.serverURL + wilcard + "/delete", JSON.stringify(model), this.options)
+				   .map(this.extractData).catch(this.handleError);
+	}
+
 	private extractData(res: Response):string {
 		console.log(res);
 		let body = res.json();

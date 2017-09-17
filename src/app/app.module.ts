@@ -5,7 +5,7 @@ import { CommonModule }  from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DataTableModule } from "angular2-datatable";
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MdDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,6 +28,7 @@ import { ModalComponent } from './components/shared/modals/modal.component';
 import { DialogForm } from './components/shared/modals/dialogForm';
 import { ConfirmDialog } from './components/shared/modals/confirmDialog';
 import { UserFormComponent } from './components/users/form/form.component';
+import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { UserFormComponent } from './components/users/form/form.component';
   UserFormComponent,
   DialogForm,
   ConfirmDialog,
+  FilterDataTablePipe,
   AppComponent
   ],
   imports: [
@@ -51,7 +53,8 @@ import { UserFormComponent } from './components/users/form/form.component';
   BrowserAnimationsModule,
   MdDialogModule,
   ReactiveFormsModule,
-  DataTableModule
+  DataTableModule,
+  FormsModule
   ],
   entryComponents: [
   ModalComponent,

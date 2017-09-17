@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 import { MdDialog } from '@angular/material';
 import { DialogForm } from '../shared/modals/dialogForm';
 import { ConfirmDialog } from '../shared/modals/confirmDialog';
+import { FilterDataTablePipe } from '../shared/pipes/filter-datatable.pipe';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ConfirmDialog } from '../shared/modals/confirmDialog';
 })
 export class UsersComponent implements OnInit {
 	private users: Array<User>;
-	private filterInput:string;
+	public filterInput:string;
 
 	constructor(public dialog: MdDialog, private dialogService: DialogService, private genericService: GenericService<User>) {}
 
@@ -43,10 +44,13 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    private confirm() {
+    private confirm(user: User) {
         const dialogRef = this.dialog.open(ConfirmDialog, {
             height: '200px',
-            width: '500px'
+            width: '500px',
+						data: {
+								'user': user
+						}
         })
     }
 
