@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../../../models/user.model';
 import { GenericService } from '../../../services/generic.service';
+import { SharedService } from '../../../services/shared.service';
+import { MdDialogRef } from '@angular/material';
+import { DialogForm } from '../../shared/modals/dialogForm';
 
 @Component({
 	selector: 'user-form',
@@ -14,15 +17,19 @@ export class UserFormComponent {
     public color:String;
     public username: string;
 
-    constructor(private formBuilder: FormBuilder, private genericService: GenericService<User>) {
+    constructor(private formBuilder: FormBuilder,
+			private genericService: GenericService<User>,
+			private dialog:MdDialogRef<DialogForm>,
+			private sharedService: SharedService) {
         this.createForm();
+				this.username= '';
     }
 
     public createForm() {
         this.userForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
-            userType: ['', Validators.required]
+            userType: ['User', Validators.required]
         })
     }
 
@@ -35,6 +42,8 @@ export class UserFormComponent {
                     this.message = success.message;
                     console.log(this.message);
                     this.color = 'success-color';
+										this.refreshTable();
+										this.dialog.close();
                     return success.message;
                 },
                 error => {
@@ -44,6 +53,11 @@ export class UserFormComponent {
                 }
             );
     }
+
+		private refreshTable() {
+			console.log("Executing refresh table");
+			this.sharedService.callComponentMethod();
+		}
 
     public validatePassword() {
         // let password = group.controls.password.value;

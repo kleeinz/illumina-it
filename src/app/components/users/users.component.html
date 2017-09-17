@@ -1,27 +1,29 @@
 <button (click)="onSave()" class="btn float-right add-button">
 	Add User <i class="fa fa-plus-circle"></i>
 </button>
-<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by username"/>
 <div *ngIf="users && users.length > 0">
 	<table class="table table-color format-table"
 	[mfData]="users | filterDataTable : filterInput"
-	#mf="mfDataTable" [mfRowsOnPage]="5">
+	#mf="mfDataTable" [mfRowsOnPage]="5" style="table-layout:fixed;">
 		<thead>
 			<tr class="thead-inverse">
 				<th><mfDefaultSorter by="username"> Username </mfDefaultSorter> </th>
 				<th><mfDefaultSorter by="username"> Password </mfDefaultSorter> </th>
 				<th><mfDefaultSorter by="username"> UserType </mfDefaultSorter> </th>
-				<th><mfDefaultSorter by="username"> Operations </mfDefaultSorter> </th>
+				<th> Operations </th>
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by username">
+			</tr>
 			<tr *ngFor="let user of mf.data">
 				<td>{{ user.username }}</td>
-				<td>{{ user.password }}</td>
+				<td>{{ user.password | hidePassword:true }}</td>
 				<td>{{ user.userType }}</td>
 				<td>
-					<i class="fa fa-edit" (click)="onEdit(user)"></i>
-					<i class="fa fa-remove" (click)="confirm(user)"></i></td>
+					<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(user)"></i>
+					<i class="fa fa-remove icons icon-remove" (click)="confirm(user)"></i></td>
 			</tr>
 	</tbody>
 	<tfoot>

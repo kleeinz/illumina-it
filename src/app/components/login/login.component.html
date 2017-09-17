@@ -16,8 +16,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<!-- <a [routerLink]="['/home']"> --><button type="submit" (click)="onSubmit(authForm)" class="btn float-right button-submit">Login</button><!-- </a> -->
+					<button type="submit" (click)="onSubmit(authForm)" class="btn float-right button-submit">Login</button>
 			</div>
 		</form>
 	</div>
 </div>
+<p class="error-message text-aligner">{{ message }}</p>

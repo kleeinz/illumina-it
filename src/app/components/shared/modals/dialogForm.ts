@@ -8,10 +8,12 @@ import { UserFormComponent } from '../../users/form/form.component';
 })
 export class DialogForm {
 
-  @ViewChild(UserFormComponent) UserFormComponent: UserFormComponent; 
+  @ViewChild(UserFormComponent) UserFormComponent: UserFormComponent;
 
   constructor(@Inject(MD_DIALOG_DATA) public data: any) {
-  	if(data) console.log(data);
+  	if(data) {
+    //  this.UserFormComponent.username = data.username;
+    }
   }
 
   public save() {

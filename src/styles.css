@@ -18,7 +18,7 @@ body {
 }
 
 .margin-top {
-	margin-top:180px;
+	margin-top:120px;
 }
 
 .font-color {
@@ -260,5 +260,26 @@ body {
 }
 
 .error-color {
-	color: red;
+	color: rgb(203,0,0);
+}
+
+.icon-remove {
+	color:rgb(203,0,0);
+	opacity: .7;
+}
+
+.icon-edit {
+	color:rgb(255,204,0);
+	opacity: .7;
+}
+
+.icons:hover {
+	opacity: .9;
+	cursor: pointer;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }

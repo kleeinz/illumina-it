@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
 	protected auth: Auth;
 	authForm: FormGroup;
+	public message:string;
 
 	constructor(private router: Router, private userService: AuthService, private formBuilder: FormBuilder) {
 		this.createAuthForm();
@@ -31,6 +32,7 @@ export class LoginComponent {
 				return this.router.navigate(['/home']);
 			},
 			error =>{
+				this.message = error;
 				return error;
 			});
 	}

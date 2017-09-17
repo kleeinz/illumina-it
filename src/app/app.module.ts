@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GenericService } from './services/generic.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth.guard.service';
+import { SharedService } from './services/shared.service';
 
 // Routes
 import { APP_ROUTING } from './app.routes';
@@ -29,6 +30,7 @@ import { DialogForm } from './components/shared/modals/dialogForm';
 import { ConfirmDialog } from './components/shared/modals/confirmDialog';
 import { UserFormComponent } from './components/users/form/form.component';
 import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.pipe';
+import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.
   DialogForm,
   ConfirmDialog,
   FilterDataTablePipe,
+  HidePasswordPipe,
   AppComponent
   ],
   imports: [
@@ -64,7 +67,8 @@ import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.
   providers: [
   GenericService,
   AuthService,
-  AuthGuardService
+  AuthGuardService,
+  SharedService
   ],
   bootstrap: [AppComponent]
 })

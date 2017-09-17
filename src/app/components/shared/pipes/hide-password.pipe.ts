@@ -1,0 +1,15 @@
+
+import {Pipe, PipeTransform} from "@angular/core";
+
+@Pipe({
+  name: 'hidePassword'
+})
+export class HidePasswordPipe implements PipeTransform {
+
+  transform(value: string, active: true) : string {
+    return active
+            ? '*'.repeat(value.length)
+            : value;
+  }
+
+}

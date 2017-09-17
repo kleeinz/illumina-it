@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../shared/modals/modal.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { GenericService } from '../../services/generic.service';
+import { SharedService } from '../../services/shared.service';
 import { User } from '../../models/user.model';
 import { MdDialog } from '@angular/material';
 import { DialogForm } from '../shared/modals/dialogForm';
 import { ConfirmDialog } from '../shared/modals/confirmDialog';
 import { FilterDataTablePipe } from '../shared/pipes/filter-datatable.pipe';
+import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
 
 
 @Component({
@@ -17,7 +19,18 @@ export class UsersComponent implements OnInit {
 	private users: Array<User>;
 	public filterInput:string;
 
-	constructor(public dialog: MdDialog, private dialogService: DialogService, private genericService: GenericService<User>) {}
+	constructor(public dialog: MdDialog,
+		private dialogService: DialogService,
+		private genericService: GenericService<User>,
+	  private sharedService: SharedService) {
+			this.sharedService.componentMethodCalled.subscribe(
+        () => {
+					console.log("Executing populateDatatable");
+          this.populateDatatable();
+        }
+      );
+
+		}
 
 	public ngOnInit() {
 		this.populateDatatable();
@@ -63,4 +76,6 @@ export class UsersComponent implements OnInit {
     		return error;
     	});
     }
+
+
 }
