@@ -19,7 +19,7 @@ router.post('/auth', (request, response) => {
             if (!success)
                 return response.status(status.codes.notFound).json(new Responser(success, status.codes.notFound, 'Username or password are not correct.'));
             let token = jwt.sign({
-                exp: 60,
+                exp: 1,
             }, app.get('superSecret'));
             console.log("Authenticating user in the system, Username: ", success.username);
             return response.status(status.codes.ok).json(new Responser([{

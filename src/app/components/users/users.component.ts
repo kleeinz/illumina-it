@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../shared/modals/modal.component';
 import { DialogService } from "ng2-bootstrap-modal";
-import { UserService } from '../../services/user.service';
+import { GenericService } from '../../services/generic.service';
 import { User } from '../../models/user.model';
 import { MdDialog } from '@angular/material';
 import { DialogForm } from '../shared/modals/dialogForm';
@@ -15,7 +15,7 @@ import { ConfirmDialog } from '../shared/modals/confirmDialog';
 export class UsersComponent implements OnInit {
 	private users: Array<User>;
 
-	constructor(public dialog: MdDialog, private dialogService: DialogService, private userService: UserService<User>) {}
+	constructor(public dialog: MdDialog, private dialogService: DialogService, private genericService: GenericService<User>) {}
 
 	public ngOnInit() {
 		this.populateDatatable();
@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit {
     }
 
     private populateDatatable():any {
-    	this.userService.find<User>('userController').subscribe(success => {
+    	this.genericService.find<User>('userController').subscribe(success => {
     		this.users = success.data as User[];
     		return success.data;
     	}, error => {

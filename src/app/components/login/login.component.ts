@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Auth } from '../../models/auth.model';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
 	selector: 'login',
@@ -12,7 +12,7 @@ export class LoginComponent {
 	protected auth: Auth;
 	authForm: FormGroup;
 
-	constructor(private router: Router, private userService: UserService<Auth>, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private userService: AuthService, private formBuilder: FormBuilder) {
 		this.createAuthForm();
 	}
 
@@ -28,7 +28,6 @@ export class LoginComponent {
 		this.auth = formGroup.value;
 		this.userService.auth<Auth>(this.auth, 'authController').subscribe(
 			success => {
-				console.log("Esta diciendo que esta bien");
 				return this.router.navigate(['/home']);
 			},
 			error =>{

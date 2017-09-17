@@ -1,3 +1,4 @@
+// Components Dependencies
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { CommonModule }  from '@angular/common';
@@ -5,17 +6,18 @@ import { NgModule } from '@angular/core';
 import { DataTableModule } from "angular2-datatable";
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserFormComponent } from './components/users/form/form.component';
-import {MdDialogModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MdDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Services
+import { GenericService } from './services/generic.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth.guard.service';
 
-//Services
-import { UserService } from './services/user.service';
-
-//Routes
+// Routes
 import { APP_ROUTING } from './app.routes';
 
+// Custom Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +27,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { ModalComponent } from './components/shared/modals/modal.component';
 import { DialogForm } from './components/shared/modals/dialogForm';
 import { ConfirmDialog } from './components/shared/modals/confirmDialog';
+import { UserFormComponent } from './components/users/form/form.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { ConfirmDialog } from './components/shared/modals/confirmDialog';
   ConfirmDialog
   ],
   providers: [
-  UserService,
+  GenericService,
+  AuthService,
+  AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

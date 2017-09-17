@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../../../models/user.model';
-import { UserService } from '../../../services/user.service';
+import { GenericService } from '../../../services/generic.service';
 
 @Component({
 	selector: 'user-form',
@@ -14,7 +14,7 @@ export class UserFormComponent {
     public color:String;
     public username: string;
 
-    constructor(private formBuilder: FormBuilder, private userService: UserService<User>) {
+    constructor(private formBuilder: FormBuilder, private genericService: GenericService<User>) {
         this.createForm();
     }
 
@@ -29,7 +29,7 @@ export class UserFormComponent {
     public onSave(formGroup: FormGroup):any {
         console.log(JSON.stringify(formGroup.value));
         this.user = formGroup.value;
-        this.userService.save<User>(this.user, 'userController').subscribe(
+        this.genericService.save<User>(this.user, 'userController').subscribe(
                 success => {
                     console.log(success.message);
                     this.message = success.message;
