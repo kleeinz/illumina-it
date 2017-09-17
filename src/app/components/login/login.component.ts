@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent {
 	protected auth: Auth;
-	authForm: FormGroup;	
+	authForm: FormGroup;
 
 	constructor(private router: Router, private userService: UserService<Auth>, private formBuilder: FormBuilder) {
 		this.createAuthForm();
@@ -26,11 +26,11 @@ export class LoginComponent {
 	public onSubmit(formGroup: FormGroup) {
 		console.log(JSON.stringify(formGroup.value));
 		this.auth = formGroup.value;
-		this.userService.auth<Auth>(this.auth, 'userController').subscribe(
+		this.userService.auth<Auth>(this.auth, 'authController').subscribe(
 			success => {
-				//return success.message;
+				console.log("Esta diciendo que esta bien");
 				return this.router.navigate(['/home']);
-			}, 
+			},
 			error =>{
 				return error;
 			});

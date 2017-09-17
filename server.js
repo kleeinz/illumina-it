@@ -3,13 +3,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
-// const jwt = require('jsonwebtoken');
-// const config = ('./express/configs/config');
-// API file for interacting with MongoDB
-const api = require('./express/routes/userController');
 
-// Configuration
-// app.set('superSecret', config.secret);
+// API file for interacting with MongoDB
+const routerController = require('./express/routes/routerController');
 
 // Parsers
 app.use(bodyParser.json());
@@ -19,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // API location
-app.use('/userController', api);
+app.use('/api', routerController);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {

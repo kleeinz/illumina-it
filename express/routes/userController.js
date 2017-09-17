@@ -1,42 +1,19 @@
 const express = require('express');
 
-//****
+// CONFIGURATION
 const config = require('../configs/config');
 const errorSender = require('../configs/ErrorSender');
 const Responser = require('../configs/Responser');
 const status = require('../configs/StatusCodes');
-//****
-
-const jwt = require('jsonwebtoken');
 const router = express.Router();
-const mongoose = require('mongoose');
-const app = express();
-const Promise = require('bluebird');
 
-// Configuration
-app.set('superSecret', config.secret);
+//const jwt = require('jsonwebtoken');
 
-// Connect
-mongoose.Promise = global.Promise;
-mongoose.connect(config.database, { useMongoClient: true });
+// const mongoose = require('mongoose');
+// const app = express();
 
+const User = require('../models/users');
 
-
-let User = require('../models/users');
-
-// Error handling
-const sendError = (err, res) => {
-    response.status = 501;
-    response.message = typeof err == 'object' ? err.message : err;
-    res.status(501).json(response);
-};
-
-// Response handling
-let response = {
-    status: 200,
-    data: [],
-    message: null
-};
 router.post('/save', (request, response) => {
     console.log("UserType:   ::::::", request.body.userType);
     let user = new User({
@@ -61,8 +38,6 @@ router.get('/find', (request, response) => {
         console.log({ err: err }, 'Unexpected Error');
         return errorSender(err, response, status.codes.server);
     });
-
-
 });
 
 router.get('/find/:username', (request, response) => {
@@ -76,29 +51,29 @@ router.get('/find/:username', (request, response) => {
 
 });
 
-router.post('/auth', (request, response) => {
-    User.findOne({'username': request.body.username, 'password': request.body.password })
-        .then(success => {
-            if (!success)
-                return response.status(status.codes.notFound).json(new Responser(success, status.codes.notFound, 'Username doesn´t exist in the database.'));
-            console.log("APP: " + app.get('superSecret'));
-            let token = jwt.sign({
-                exp: 60,
-                data: request.body.username
-            }, app.get('superSecret'));
-
-
-            console.log("Authenticating user in the system", success);
-            return response.status(200).json({
-                'message': 'Accessing to the system',
-                'username': request.body.username,
-                'token': token
-            });
-        }).catch(err => {
-            console.log({ err: err }, 'Unable to login');
-            sendError(err, response);
-        });
-
-});
+// router.post('/auth', (request, response) => {
+//     User.findOne({'username': request.body.username, 'password': request.body.password })
+//         .then(success => {
+//             if (!success)
+//                 return response.status(status.codes.notFound).json(new Responser(success, status.codes.notFound, 'Username doesn´t exist in the database.'));
+//             console.log("APP: " + app.get('superSecret'));
+//             let token = jwt.sign({
+//                 exp: 60,
+//                 data: request.body.username
+//             }, app.get('superSecret'));
+//
+//
+//             console.log("Authenticating user in the system", success);
+//             return response.status(200).json({
+//                 'message': 'Accessing to the system',
+//                 'username': request.body.username,
+//                 'token': token
+//             });
+//         }).catch(err => {
+//             console.log({ err: err }, 'Unable to login');
+//             sendError(err, response);
+//         });
+//
+// });
 
 module.exports = router;

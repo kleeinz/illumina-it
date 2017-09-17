@@ -15,7 +15,7 @@ export class UserService<Model> {
 	constructor(private http:Http) {
 		this.headers = new Headers({ 'Content-Type': 'application/json' });
 		this.options = new RequestOptions({ headers: this.headers });
-		this.serverURL = "http://localhost:3000/";
+		this.serverURL = "http://localhost:3000/api/";
 	}
 
 	public auth<Auth>(auth: Auth, wilcard:string) {
