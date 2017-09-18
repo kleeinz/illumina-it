@@ -30,6 +30,7 @@ export class UserFormComponent {
 			private sharedService: SharedService) {
         this.createForm();
 				this.data = this.getData();
+				this.userTypeNgModel = 'user';
 				console.log(this.data);
 				if (this.data){
 						if (this.data.username) {
