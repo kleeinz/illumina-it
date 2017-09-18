@@ -20,21 +20,27 @@ export class UserFormComponent {
 		private passwordNgModel: string;
 		private userTypeNgModel: string;
 		private confirmNgModel: string;
-
+		private readOnly:boolean;
+		private idNgModel:string;
+		private data:any;
 
     constructor(private formBuilder: FormBuilder,
 			private genericService: GenericService<User>,
 			private dialog:MdDialogRef<DialogForm>,
 			private sharedService: SharedService) {
         this.createForm();
-				let data = this.getData();
-				console.log(data);
-				if (data){
-						this.usernameNgModel = data.username;
-						this.nameNgModel = data.name;
-						this.passwordNgModel = data.password;
-						this.userTypeNgModel = data.userType;
-						this.confirmNgModel = data.password;
+				this.data = this.getData();
+				console.log(this.data);
+				if (this.data){
+						if (this.data.username) {
+								this.readOnly = true;
+						}
+						this.idNgModel = this.data._id;
+						this.usernameNgModel = this.data.username;
+						this.nameNgModel = this.data.name;
+						this.passwordNgModel = this.data.password;
+						this.userTypeNgModel = this.data.userType;
+						this.confirmNgModel = this.data.password;
 				}
     }
 
@@ -53,6 +59,8 @@ export class UserFormComponent {
     public onSave(formGroup: FormGroup):any {
         console.log(JSON.stringify(formGroup.value));
         this.user = formGroup.value;
+				if(this.data)
+						this.user._id = this.idNgModel;
         this.genericService.save<User>(this.user, 'userController').subscribe(
                 success => {
                     console.log(success.message);

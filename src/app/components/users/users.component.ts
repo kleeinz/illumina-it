@@ -42,11 +42,12 @@ export class UsersComponent implements OnInit {
   }
 
   private onEdit(user: User) {
-        console.log("userType", user.name);
+        console.log("user", user);
         const dialogRef = this.dialog.open(DialogForm, {
             height: '500px',
             width: '400px',
             data: {
+								'_id': user._id,
                 'username': user.username,
                 'password': user.password,
                 'userType': user.userType,
