@@ -19,9 +19,15 @@ export class GenericService<Model> {
 
 	public save<Model>(model: Model, wildcard:string) {
 		console.log("Running save method in service, ", JSON.stringify(model));
-		return this.http.post( this.serverURL + wildcard + "/save",
+		return this.http.post(this.serverURL + wildcard + "/save",
 			JSON.stringify(model), this.options )
 		.map(this.extractData).catch(this.handleError);
+	}
+
+	public update<Model>(model: Model, wildcard: string) {
+		console.log("Running update method in service, ", JSON.stringify(model));
+		return this.http.put(this.serverURL + wildcard + "/update", JSON.stringify(model), this.options)
+						 .map(this.extractData).catch(this.handleError);
 	}
 
 	public find<Model>(wildcard: string): Observable<any> {

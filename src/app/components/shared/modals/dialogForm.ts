@@ -17,7 +17,12 @@ export class DialogForm {
     }
   }
 
-  public save() {
-    this.UserFormComponent.onSave(this.UserFormComponent.userForm);
+  public onSubmit() {
+    if(this.data)
+      this.UserFormComponent.onUpdate(this.UserFormComponent.userForm);
+    else
+      this.UserFormComponent.onSave(this.UserFormComponent.userForm);
+
+    
   }
 }
