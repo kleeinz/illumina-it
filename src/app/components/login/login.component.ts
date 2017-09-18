@@ -31,7 +31,7 @@ export class LoginComponent {
 			success => {
 				return this.router.navigate(['/home']);
 			},
-			error =>{
+			error => {
 				this.message = error;
 				return error;
 			});

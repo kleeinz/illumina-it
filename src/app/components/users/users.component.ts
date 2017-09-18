@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalComponent } from '../shared/modals/modal.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { GenericService } from '../../services/generic.service';
 import { SharedService } from '../../services/shared.service';
@@ -9,7 +8,6 @@ import { DialogForm } from '../shared/modals/dialogForm';
 import { ConfirmDialog } from '../shared/modals/confirmDialog';
 import { FilterDataTablePipe } from '../shared/pipes/filter-datatable.pipe';
 import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
-
 
 @Component({
 	selector: 'users',
@@ -29,35 +27,35 @@ export class UsersComponent implements OnInit {
           this.populateDatatable();
         }
       );
-
-		}
+	}
 
 	public ngOnInit() {
 		this.populateDatatable();
 	}
 
 	private onSave() {
+				this.sharedService.data = null;
         const dialogRef = this.dialog.open(DialogForm, {
             height: '500px',
             width: '400px'
         });
+  }
 
-    }
-
-    private onEdit(user: User) {
-        console.log("userType", user.userType);
+  private onEdit(user: User) {
+        console.log("userType", user.name);
         const dialogRef = this.dialog.open(DialogForm, {
             height: '500px',
             width: '400px',
             data: {
                 'username': user.username,
                 'password': user.password,
-                'userType': user.userType
+                'userType': user.userType,
+								'name': user.name
             }
         });
-    }
+  }
 
-    private confirm(user: User) {
+  private confirm(user: User) {
         const dialogRef = this.dialog.open(ConfirmDialog, {
             height: '200px',
             width: '500px',
@@ -65,9 +63,9 @@ export class UsersComponent implements OnInit {
 								'user': user
 						}
         })
-    }
+  }
 
-    private populateDatatable():any {
+  private populateDatatable():any {
     	this.genericService.find<User>('userController').subscribe(success => {
     		this.users = success.data as User[];
     		return success.data;
@@ -75,7 +73,7 @@ export class UsersComponent implements OnInit {
     		console.log(error);
     		return error;
     	});
-    }
+  }
 
 
 }

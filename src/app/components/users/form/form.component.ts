@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { User } from '../../../models/user.model';
 import { GenericService } from '../../../services/generic.service';
 import { SharedService } from '../../../services/shared.service';
@@ -15,21 +15,37 @@ export class UserFormComponent {
     userForm: FormGroup;
     public message: string;
     public color:String;
-    public username: string;
+		private usernameNgModel: string;
+		private nameNgModel: string;
+		private passwordNgModel: string;
+		private userTypeNgModel: string;
+		private confirmNgModel: string;
+
 
     constructor(private formBuilder: FormBuilder,
 			private genericService: GenericService<User>,
 			private dialog:MdDialogRef<DialogForm>,
 			private sharedService: SharedService) {
         this.createForm();
-				this.username= '';
+				let data = this.getData();
+				console.log(data);
+				if (data){
+						this.usernameNgModel = data.username;
+						this.nameNgModel = data.name;
+						this.passwordNgModel = data.password;
+						this.userTypeNgModel = data.userType;
+						this.confirmNgModel = data.password;
+				}
     }
 
     public createForm() {
         this.userForm = this.formBuilder.group({
 						name: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', Validators.required],
+						passwords: this.formBuilder.group({
+							password: ['', Validators.required],
+							confirm: ['', Validators.required]
+						}, { validator: this.validatePassword }),
+						username: ['', Validators.required],
             userType: ['User', Validators.required]
         })
     }
@@ -60,9 +76,13 @@ export class UserFormComponent {
 			this.sharedService.callComponentMethod();
 		}
 
-    public validatePassword() {
-        // let password = group.controls.password.value;
-        // let repeat = group.controls.repeat.value;
-        // return password === repeat ? null : { notMatch: true };
+		private getData() {
+			console.log("Getting data");
+			return this.sharedService.data;
+		}
+
+    private validatePassword(abstractControl: AbstractControl): { invalid: boolean } {
+        if (abstractControl.get('pass') !== abstractControl.get('confirm'))
+						return { invalid: true };
     }
 }

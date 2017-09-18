@@ -25,7 +25,6 @@ import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { ClientsComponent } from './components/clients/clients.component';
-import { ModalComponent } from './components/shared/modals/modal.component';
 import { DialogForm } from './components/shared/modals/dialogForm';
 import { ConfirmDialog } from './components/shared/modals/confirmDialog';
 import { UserFormComponent } from './components/users/form/form.component';
@@ -39,7 +38,6 @@ import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
   NavBarComponent,
   UsersComponent,
   ClientsComponent,
-  ModalComponent,
   UserFormComponent,
   DialogForm,
   ConfirmDialog,
@@ -60,7 +58,6 @@ import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
   FormsModule
   ],
   entryComponents: [
-  ModalComponent,
   DialogForm,
   ConfirmDialog
   ],

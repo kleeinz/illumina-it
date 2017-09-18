@@ -14,7 +14,7 @@ router.post('/save', (request, response) => {
     let user = new User({
         username: request.body.username,
         name: request.body.name,
-        password: request.body.password,
+        password: request.body.passwords.password,
         userType: request.body.userType
     });
     user.save().then(success =>  {
