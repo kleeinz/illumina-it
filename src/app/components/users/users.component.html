@@ -8,6 +8,7 @@
 		<thead>
 			<tr class="thead-inverse">
 				<th><mfDefaultSorter by="username"> Username </mfDefaultSorter> </th>
+				<th><mfDefaultSorter by="username"> Full Name </mfDefaultSorter> </th>
 				<th><mfDefaultSorter by="username"> Password </mfDefaultSorter> </th>
 				<th><mfDefaultSorter by="username"> UserType </mfDefaultSorter> </th>
 				<th> Operations </th>
@@ -19,11 +20,13 @@
 			</tr>
 			<tr *ngFor="let user of mf.data">
 				<td>{{ user.username }}</td>
+				<td>{{ user.name }}</td>
 				<td>{{ user.password | hidePassword:true }}</td>
 				<td>{{ user.userType }}</td>
 				<td>
 					<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(user)"></i>
-					<i class="fa fa-remove icons icon-remove" (click)="confirm(user)"></i></td>
+					<i class="fa fa-remove icons icon-remove" (click)="confirm(user)"></i>
+				</td>
 			</tr>
 	</tbody>
 	<tfoot>

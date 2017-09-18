@@ -27,6 +27,7 @@ export class UserFormComponent {
 
     public createForm() {
         this.userForm = this.formBuilder.group({
+						name: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', Validators.required],
             userType: ['User', Validators.required]

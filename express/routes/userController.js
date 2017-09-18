@@ -7,17 +7,13 @@ const Responser = require('../configs/Responser');
 const status = require('../configs/StatusCodes');
 const router = express.Router();
 
-//const jwt = require('jsonwebtoken');
-
-// const mongoose = require('mongoose');
-// const app = express();
-
 const User = require('../models/users');
 
 router.post('/save', (request, response) => {
     console.log("UserType:   ::::::", request.body.userType);
     let user = new User({
         username: request.body.username,
+        name: request.body.name,
         password: request.body.password,
         userType: request.body.userType
     });
