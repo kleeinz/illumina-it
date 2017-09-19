@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
 	private onSave() {
 				this.sharedService.data = null;
         const dialogRef = this.dialog.open(DialogForm, {
-            height: '500px',
+            height: '550px',
             width: '400px'
         });
   }
@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
   private onEdit(user: User) {
         console.log("user", user);
         const dialogRef = this.dialog.open(DialogForm, {
-            height: '500px',
+            height: '550px',
             width: '400px',
             data: {
 								'_id': user._id,

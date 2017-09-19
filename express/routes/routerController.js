@@ -14,8 +14,12 @@ mongoose.connect(config.database, { useMongoClient: true });
 
 const authController = require('./authController');
 const userController = require('./userController');
+const clientController = require('./clientController');
+const imageController = require('./imageController');
 
 router.use('/userController', userController);
 router.use('/authController', authController);
+router.use('/authController', clientController);
+router.use('/imageController', imageController);
 
 module.exports = router;
