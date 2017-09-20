@@ -48,7 +48,9 @@
 	<div class="form-group">
 		<div class="input-group">
 			<label class="custom-file">
-			<input type="file" id="file" class="custom-file-input">
+				<input class="custom-file-input" type="file" 
+				ng2FileSelect [uploader]="uploader" accept="image/*" 
+				(change)="uploadImg($change)"/>
 				<span class="custom-file-control"></span>
 			</label>
 		</div>

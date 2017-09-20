@@ -4,5 +4,6 @@ export interface User {
 	name: String,
 	password: String,
 	userType: String,
-	isModified: boolean
+	isModified: boolean,
+	image: string
 }

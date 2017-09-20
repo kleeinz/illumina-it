@@ -28,24 +28,6 @@ router.put('/update', (request, response) => {
 });
 
 
-// router.put('/update', (request, response) => {
-//   console.log("id: ", request.body._id);
-//   User.update({
-//     '_id': request.body._id,
-//     'username': request.body.username
-//   },
-//   {
-//     name: request.body.name,
-//     password: request.body.passwords.password,
-//     userType: request.body.userType
-//   }).then(success => {
-//     return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The user has been updated.'));
-//   }).catch( err => {
-//     console.log({ err: err }, 'Unexpected Error');
-//     return errorSender(err, response, status.codes.server);
-//   });
-// });
-
 router.post('/save', (request, response) => {
   let user = new User({
     username: request.body.username,

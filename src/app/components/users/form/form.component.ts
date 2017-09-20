@@ -3,8 +3,10 @@ import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from
 import { User } from '../../../models/user.model';
 import { GenericService } from '../../../services/generic.service';
 import { SharedService } from '../../../services/shared.service';
+import { ImageService } from '../../../services/image.service';
 import { MdDialogRef } from '@angular/material';
 import { DialogForm } from '../../shared/modals/dialogForm';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 @Component({
 	selector: 'user-form',
@@ -24,12 +26,20 @@ export class UserFormComponent {
 	private readOnly:boolean;
 	private idNgModel:string;
 	private data:any;
+	private uploader:FileUploader;
 
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<User>,
 		private dialog:MdDialogRef<DialogForm>,
-		private sharedService: SharedService) {
+		private sharedService: SharedService,
+		private imageService: ImageService) {
 		this.createForm();
+		this.uploader = new FileUploader({url: this.imageService.serverURL, itemAlias: 'image'});
+		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
+	
+		// this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+		// 	this.changeImage(JSON.parse(response).data);
+		// };
 		this.data = this.getData();
 		this.userTypeNgModel = 'user';
 		console.log(this.data);
@@ -46,6 +56,10 @@ export class UserFormComponent {
 		}
 	}
 
+	private uploadImg(change: any) {
+		this.uploader.uploadAll();
+	}
+
 	public createForm() {
 		this.userForm = this.formBuilder.group({
 			name: ['', Validators.required],
@@ -54,7 +68,8 @@ export class UserFormComponent {
 				confirm: ['', Validators.required]
 			}, { validator: this.validatePassword }),
 			username: ['', Validators.required],
-			userType: ['User', Validators.required]
+			userType: ['User', Validators.required],
+			image: ['', Validators.required]
 		})
 	}
 

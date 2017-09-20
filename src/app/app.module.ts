@@ -8,12 +8,15 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MdDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FileSelectDirective } from 'ng2-file-upload';
+
 
 // Services
 import { GenericService } from './services/generic.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth.guard.service';
 import { SharedService } from './services/shared.service';
+import { ImageService } from './services/image.service';
 
 // Routes
 import { APP_ROUTING } from './app.routes';
@@ -49,6 +52,7 @@ import { ClientFormComponent } from './components/clients/form/clientForm.compon
   ConfirmClientDialog,
   FilterDataTablePipe,
   HidePasswordPipe,
+  FileSelectDirective,
   AppComponent
   ],
   imports: [
@@ -73,6 +77,7 @@ import { ClientFormComponent } from './components/clients/form/clientForm.compon
   GenericService,
   AuthService,
   AuthGuardService,
+  ImageService,
   SharedService
   ],
   bootstrap: [AppComponent]
