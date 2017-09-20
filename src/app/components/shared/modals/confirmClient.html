@@ -1,0 +1,10 @@
+<h2 md-dialog-title class="border-bottom">Confirmation Message</h2>
+<md-dialog-content>
+  Are you sure that do you want to delete this element?
+  The transaction doesn't have rollback.
+</md-dialog-content>
+<md-dialog-actions>
+  <button (click)="onDelete()"
+  class="margin-right btn background-color font-color-button hover-button" tabindex="1">Accept</button>
+  <button class="btn hover-button font-color-button main-color-button" md-button md-dialog-close tabindex="-1">Cancel</button>
+</md-dialog-actions>

@@ -19,7 +19,7 @@ const imageController = require('./imageController');
 
 router.use('/userController', userController);
 router.use('/authController', authController);
-router.use('/authController', clientController);
+router.use('/clientController', clientController);
 router.use('/imageController', imageController);
 
 module.exports = router;

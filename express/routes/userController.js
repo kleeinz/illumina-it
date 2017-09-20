@@ -46,7 +46,7 @@ router.post('/save', (request, response) => {
 router.get('/find', (request, response) => {
   User.find().then(success => {
     console.log("Getting all objects from the database, ", success);
-    return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The objects have been got.'));
+    return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The users have been got.'));
   }).catch(err => {
     console.log({ err: err }, 'Unexpected Error');
     return errorSender(err, response, status.codes.server);
@@ -56,7 +56,7 @@ router.get('/find', (request, response) => {
 router.get('/find/:username', (request, response) => {
   User.findOne({'username':request.params.username}).then(success => {
     console.log("Getting object from the database, ", success);
-    return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The object has been got.'));
+    return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The users has been got.'));
   }).catch(err => {
     console.log({ err: err }, 'Unexpected Error');
     return errorSender(err, response, status.codes.server);
@@ -66,13 +66,12 @@ router.get('/find/:username', (request, response) => {
 
 router.post('/delete', (request, response) => {
   User.remove({'username': request.body.user.username}).then(data => {
-      //console.log("Removing object from the database, ", data);
+      console.log("Removing object from the database, ", data);
       return response.status(status.codes.ok).json(new Responser(data, status.codes.ok, 'The object has been removed.'));
     }).catch(err => {
       console.log({ err: err }, 'Unexpected Error');
       return errorSender(err, response, status.codes.server);
     });
-
-  });
+});
 
 module.exports = router;

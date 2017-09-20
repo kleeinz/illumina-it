@@ -27,9 +27,12 @@ import { NavBarComponent } from './components/navbar/navbar.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { DialogForm } from './components/shared/modals/dialogForm';
 import { ConfirmDialog } from './components/shared/modals/confirmDialog';
+import { DialogClientForm } from './components/shared/modals/dialogClientForm';
+import { ConfirmClientDialog } from './components/shared/modals/confirmClient';
 import { UserFormComponent } from './components/users/form/form.component';
 import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.pipe';
 import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
+import { ClientFormComponent } from './components/clients/form/clientForm.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +42,11 @@ import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
   UsersComponent,
   ClientsComponent,
   UserFormComponent,
+  ClientFormComponent,
   DialogForm,
   ConfirmDialog,
+  DialogClientForm,
+  ConfirmClientDialog,
   FilterDataTablePipe,
   HidePasswordPipe,
   AppComponent
@@ -59,7 +65,9 @@ import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
   ],
   entryComponents: [
   DialogForm,
-  ConfirmDialog
+  ConfirmDialog,
+  DialogClientForm,
+  ConfirmClientDialog
   ],
   providers: [
   GenericService,

@@ -1,38 +1,64 @@
-<button type="button" class="btn btn-danger float-right margin-left warning-color">Remove Client <i class="fa fa-remove"></i></button>
-<button type="button" class="btn btn-warning float-right warning-color margin-left">Edit Client <i class="fa fa-edit"></i></button>
-<button type="button" class="btn btn-success float-right warning-color">Add Client <i class="fa fa-plus"></i></button>
-<table class="table table-color format-table">
+<button (click)="onSave()" class="btn float-right add-button">
+	Add Client <i class="fa fa-plus-circle"></i>
+</button>
+<div *ngIf="clients && clients.length > 0">
+	<table class="table table-color format-table"
+	[mfData]="clients | filterDataTable : filterInput"
+	#mf="mfDataTable" [mfRowsOnPage]="5" style="table-layout:fixed;">
 	<thead>
 		<tr class="thead-inverse">
-			<th>Name</th>
-			<th>Status</th>
-			<th>Sex</th>
-			<th>Age</th>
-			<th>Proffesion</th>
+			<th><mfDefaultSorter by="name"> Name </mfDefaultSorter> </th>
+			<th><mfDefaultSorter by="phone"> Phone </mfDefaultSorter> </th>
+			<th><mfDefaultSorter by="married"> Married </mfDefaultSorter> </th>
+			<th><mfDefaultSorter by="gender"> Gender </mfDefaultSorter> </th>
+			<th><mfDefaultSorter by="age"> Age </mfDefaultSorter> </th>
+			<th><mfDefaultSorter by="profession"> Profession </mfDefaultSorter> </th>
+			<th> Operations </th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>John Smith</td>
-			<td>Single</td>
-			<td>Male</td>
-			<td>29</td>
-			<td>Assassin</td>
+			<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by name">
 		</tr>
-		<tr>
-			<td>Miriam Smith</td>
-			<td>Single</td>
-			<td>Female</td>
-			<td>25</td>
-			<td>Tanker</td>
-		</tr>
-		<tr>
-			<td>Aegon Targaryen</td>
-			<td>Single</td>
-			<td>Male</td>
-			<td>29</td>
-			<td>King in the north</td>
+		<tr *ngFor="let client of mf.data">
+			<td>{{ client.name }}</td>
+			<td>{{ client.phone }}</td>
+			<td>{{ client.married }}</td>
+			<td>{{ client.gender }}</td>
+			<td>{{ client.age }}</td>
+			<td>{{ client.profession }}</td>
+			<td>
+				<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(client)"></i>
+				<i class="fa fa-remove icons icon-remove" (click)="confirm(client)"></i>
+			</td>
 		</tr>
 	</tbody>
-	
+	<tfoot>
+		<tr>
+			<td>
+				<mfBootstrapPaginator></mfBootstrapPaginator>
+			</td>
+		</tr>
+	</tfoot>
 </table>
+</div>
+<div *ngIf="!clients || clients.length < 1">
+	<table class="table table-color format-table">
+		<thead>
+			<tr class="thead-inverse">
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Married</th>
+				<th>Gender</th>
+				<th>Age</th>
+				<th>Profession</th>
+				<th>Operations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>No display data </td>
+			</tr>
+		</tbody>
+	</table>
+</div>
