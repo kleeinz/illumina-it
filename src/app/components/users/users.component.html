@@ -3,7 +3,7 @@
 </button>
 <div *ngIf="users && users.length > 0">
 	<table class="table table-color format-table"
-	[mfData]="users | filterDataTable : filterInput"
+	[mfData]="users | filterDataTable : filterInput : 'users'"
 	#mf="mfDataTable" [mfRowsOnPage]="5" style="table-layout:fixed;">
 	<thead>
 		<tr class="thead-inverse">
