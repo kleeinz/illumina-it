@@ -9,7 +9,7 @@ const app = express();
 const Client = require('../models/clients');
 
 router.put('/update', (request, response) => {
-  console.log("id: ", request.body._id);
+  console.log("id: ", request.body);
   Client.update({
     '_id': request.body._id,
     'name': request.body.name

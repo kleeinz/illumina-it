@@ -13,6 +13,7 @@ import { DialogForm } from '../../shared/modals/dialogForm';
 export class UserFormComponent {
 	protected user: User;
 	userForm: FormGroup;
+	passwords: FormGroup;
 	public message: string;
 	public color:String;
 	private usernameNgModel: string;
@@ -85,6 +86,8 @@ export class UserFormComponent {
 		this.user = formGroup.value;
 		if(this.data)
 			this.user._id = this.idNgModel;
+		this.user.isModified = this.userForm.get(['passwords','password']).dirty;
+		console.log("isModified: ", this.user.isModified);
 		this.genericService.update<User>(this.user, 'userController').subscribe(
 			success => {
 				console.log(success.message);
