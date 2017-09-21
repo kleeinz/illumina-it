@@ -15,6 +15,25 @@ export class ImageService {
   constructor(private http:Http, private router: Router){
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
-    this.serverURL = "http://localhost:3000/api/imageController/upload";
+    this.serverURL = "http://localhost:3000/api/imageController/";
+  }
+
+  public delete(wildcard: string, imageName: string) {
+    console.log("Running onDelete method in service");
+    return this.http.delete(`${this.serverURL}${wildcard}/${imageName}`)
+                    .map(this.extractData).catch(this.handleError);
+  }
+
+  private extractData(res: Response):string {
+    console.log(res);
+    let body = res.json();
+    return body || {};
+  }
+
+  private handleError(error: any) {
+    let errMsg = (error.message) ? error.message :
+    error.status ? `${JSON.parse(error._body).message}` : 'Unable connect to server';
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
 }

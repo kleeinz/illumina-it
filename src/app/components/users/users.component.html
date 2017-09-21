@@ -7,6 +7,7 @@
 	#mf="mfDataTable" [mfRowsOnPage]="5" style="table-layout:fixed;">
 	<thead>
 		<tr class="thead-inverse">
+			<th>Image</th>
 			<th><mfDefaultSorter by="username"> Username </mfDefaultSorter> </th>
 			<th><mfDefaultSorter by="name"> Full Name </mfDefaultSorter> </th>
 			<th><mfDefaultSorter by="userType"> UserType </mfDefaultSorter> </th>
@@ -18,6 +19,7 @@
 			<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by username">
 		</tr>
 		<tr *ngFor="let user of mf.data">
+			<td><img id="image" class="img-fluid" src="http://localhost:3000/images/1506027985718.jpg"/></td>
 			<td>{{ user.username }}</td>
 			<td>{{ user.name }}</td>
 			<td>{{ user.userType }}</td>

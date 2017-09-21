@@ -18,6 +18,7 @@ export class UserFormComponent implements OnInit {
 	passwords: FormGroup;
 	public message: string;
 	public uploadMessage: string;
+	public fileUploaded: string;
 	public color:String;
 	private usernameNgModel: string;
 	private nameNgModel: string;
@@ -30,15 +31,13 @@ export class UserFormComponent implements OnInit {
 	private uploader:FileUploader;
 	private imageNgModel: string;
 
-	calis:string;
-
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<User>,
 		private dialog:MdDialogRef<DialogForm>,
 		private sharedService: SharedService,
 		private imageService: ImageService) {
 		this.createForm();
-		this.uploader = new FileUploader({url: this.imageService.serverURL, itemAlias: 'image'});
+		this.uploader = new FileUploader({url: this.imageService.serverURL + "/upload", itemAlias: 'image'});
 		this.uploadMessage = 'Choose Image...';
 		this.data = this.getData();
 		this.userTypeNgModel = 'user';
@@ -59,17 +58,27 @@ export class UserFormComponent implements OnInit {
 
 	public ngOnInit () {
 		this.uploader.onSuccessItem = (item:FileItem,
-																	 response:string, status:number,
-																	 headers:ParsedResponseHeaders) => {
-			console.log("fileItem: " + item._file.name);
-			console.log("response: " + JSON.parse(response).message);
+			response:string, status:number,
+			headers:ParsedResponseHeaders) => {
+		//	console.log("fileItem: " + item._file.name);
+			//console.log("response: " + JSON.parse(response).message);
 			this.uploadMessage = item._file.name;
-			console.log(JSON.parse(response).data);
-			this.userForm.controls['image'].setValue(JSON.parse(response).data);
+		//	console.log(JSON.parse(response).data);
+			this.userForm.controls['image'].setValue(JSON.parse(response).data.filePath);
+			this.fileUploaded = JSON.parse(response).data.filename;
+			console.log("Primera imagen: ", this.fileUploaded);
 		}
 	}
 
-	private uploadImg(change: any) {
+	private uploadImg() {
+		if (this.fileUploaded) {
+			console.log("fileUploaded: ", this.fileUploaded);
+			this.imageService.delete("deleteImg",this.fileUploaded).subscribe(success => {
+				return success;
+			}, error => {
+				return error;
+			});
+		}
 		this.uploader.uploadAll();
 	}
 

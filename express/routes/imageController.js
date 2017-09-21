@@ -29,7 +29,7 @@ router.post('/upload', (request, response) => {
 			if (err)
 				return errorSender(err, response, status.codes.server);
 			return response.status(status.codes.ok)
-			.json(new Responser(filePath, status.codes.ok, 'The image has been upload.'));
+			.json(new Responser({'filePath':filePath, 'filename': newName}, status.codes.ok, 'The image has been upload.'));
 		});
 	});
 });

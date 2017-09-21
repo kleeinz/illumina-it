@@ -291,17 +291,3 @@ select {
 	-moz-appearance: none;
 	appearance: none;
 }
-
-.custom-file-control {
-	color: rgba(153,153,153,.5) !important;
-	font-size: 14px !important;
-}
-
-
-.custom-file-control::after {
-  content: "Choose image..." !important;
-}
-
-.custom-file-control::before {
-  content: "Browse" !important;
-}
