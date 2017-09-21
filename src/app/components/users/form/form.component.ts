@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { User } from '../../../models/user.model';
 import { GenericService } from '../../../services/generic.service';
@@ -6,17 +6,18 @@ import { SharedService } from '../../../services/shared.service';
 import { ImageService } from '../../../services/image.service';
 import { MdDialogRef } from '@angular/material';
 import { DialogForm } from '../../shared/modals/dialogForm';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
 
 @Component({
 	selector: 'user-form',
 	templateUrl: 'form.component.html',
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
 	protected user: User;
 	userForm: FormGroup;
 	passwords: FormGroup;
 	public message: string;
+	public uploadMessage: string;
 	public color:String;
 	private usernameNgModel: string;
 	private nameNgModel: string;
@@ -35,8 +36,8 @@ export class UserFormComponent {
 		private imageService: ImageService) {
 		this.createForm();
 		this.uploader = new FileUploader({url: this.imageService.serverURL, itemAlias: 'image'});
-		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
-	
+		// this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
+		//
 		// this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
 		// 	this.changeImage(JSON.parse(response).data);
 		// };
@@ -53,6 +54,13 @@ export class UserFormComponent {
 			this.passwordNgModel = this.data.password;
 			this.userTypeNgModel = this.data.userType;
 			this.confirmNgModel = this.data.password;
+		}
+	}
+
+	public ngOnInit () {
+		this.uploader.onSuccessItem = (item:FileItem, response:string, status:number, headers:ParsedResponseHeaders) => {
+			console.log("onSuccessItem " + JSON.parse(response).message);
+			this.uploadMessage = JSON.parse(response).message;
 		}
 	}
 

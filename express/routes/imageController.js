@@ -39,15 +39,15 @@ router.post('/upload', (request, response) => {
 		if (err) {
 			sendError(err, response);
 		}
-		let fileExtension = _.last(request.file.originalname.split('.'));
-		console.log("Extension: ", fileExtension);
-		let oldFileName = request.file.filename;
-		let newFileName = moment()+'.'+fileExtension;
-		fs.rename(config.img + oldFileName, config.img + newFileName, function (err) {
+		let extension = _.last(request.file.originalname.split('.'));
+		let oldName = request.file.filename;
+		let newName = moment()+ '.' + extension;
+		let filePath = `http://localhost:3000/images/${newName}`;
+		fs.rename(`${config.img}${oldName}`, `${config.img}${newName}`, function (err) {
 			if (err)
 				throw err;
 			return response.status(status.codes.ok)
-			.json(new Responser("http://localhost:3000/images/" + newFileName, status.codes.ok, 'The image has been upload.'));
+			.json(new Responser(filePath, status.codes.ok, 'The image has been upload.'));
 		});
 	});
 });
