@@ -26,7 +26,7 @@ router.use('/upload', uploadImage);
 // 		}).catch((err) => {
 // 			console.log(err);
 // 			return errorSender(err, response, status.codes.server);
-// 		});	
+// 		});
 // 	}).catch((err) => {
 // 		console.log(err);
 // 		return errorSender(err, response, status.codes.server);
@@ -40,13 +40,14 @@ router.post('/upload', (request, response) => {
 			sendError(err, response);
 		}
 		let fileExtension = _.last(request.file.originalname.split('.'));
+		console.log("Extension: ", fileExtension);
 		let oldFileName = request.file.filename;
 		let newFileName = moment()+'.'+fileExtension;
-		fs.rename(oldFileName, newFileName, function (err) {
-			if (err) 
+		fs.rename(config.img + oldFileName, config.img + newFileName, function (err) {
+			if (err)
 				throw err;
 			return response.status(status.codes.ok)
-			.json(new Responser("http://localhost:3000/api/images/" + newFile, status.codes.ok, 'The image has been upload.'));
+			.json(new Responser("http://localhost:3000/images/" + newFileName, status.codes.ok, 'The image has been upload.'));
 		});
 	});
 });
