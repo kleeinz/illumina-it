@@ -16,6 +16,7 @@ router.put('/update', (request, response) => {
           if (request.body.isModified)
               user.password = request.body.passwords.password;
           user.userType = request.body.userType;
+          user.image = request.body.image;
           user.save().then(success => {
               return response.status(status.codes.ok).json(new Responser(success, status.codes.ok, 'The user has been updated.'));
           }).catch((err) => {
@@ -33,7 +34,8 @@ router.post('/save', (request, response) => {
     username: request.body.username,
     name: request.body.name,
     password: request.body.passwords.password,
-    userType: request.body.userType
+    userType: request.body.userType,
+    image: request.body.image
   });
   user.save().then(success =>  {
     console.log("The user has been created.");

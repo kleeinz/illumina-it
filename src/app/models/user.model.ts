@@ -5,5 +5,5 @@ export interface User {
 	password: String,
 	userType: String,
 	isModified: boolean,
-	image: string
+	image: String
 }

@@ -28,6 +28,9 @@ export class UserFormComponent implements OnInit {
 	private idNgModel:string;
 	private data:any;
 	private uploader:FileUploader;
+	private imageNgModel: string;
+
+	calis:string;
 
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<User>,
@@ -37,11 +40,6 @@ export class UserFormComponent implements OnInit {
 		this.createForm();
 		this.uploader = new FileUploader({url: this.imageService.serverURL, itemAlias: 'image'});
 		this.uploadMessage = 'Choose Image...';
-		// this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
-		//
-		// this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-		// 	this.changeImage(JSON.parse(response).data);
-		// };
 		this.data = this.getData();
 		this.userTypeNgModel = 'user';
 		console.log(this.data);
@@ -59,10 +57,14 @@ export class UserFormComponent implements OnInit {
 	}
 
 	public ngOnInit () {
-		this.uploader.onSuccessItem = (item:FileItem, response:string, status:number, headers:ParsedResponseHeaders) => {
+		this.uploader.onSuccessItem = (item:FileItem,
+																	 response:string, status:number,
+																	 headers:ParsedResponseHeaders) => {
 			console.log("fileItem: " + item._file.name);
 			console.log("response: " + JSON.parse(response).message);
 			this.uploadMessage = item._file.name;
+			console.log(JSON.parse(response).data);
+			this.userForm.controls['image'].setValue(JSON.parse(response).data);
 		}
 	}
 

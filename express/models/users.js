@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const usersSchema = new Schema({
-	username: { type: String, required: true, unique: true, lowercase:true },
+	username: { type: String, required: true, unique: true, lowercase:true, trim:true },
 	name: { type: String, required: true, lowercase:true},
 	password: { type: String, required: true },
-	userType: { type: String, required: true, lowercase:true }
+	userType: { type: String, required: true, lowercase:true },
+	image: { type: String }
 });
 
 usersSchema.pre('save', function(next) {
@@ -14,7 +15,7 @@ usersSchema.pre('save', function(next) {
         var user = this;
         if (!user.isModified('password')) {
 					return next();
-				} 
+				}
         bcrypt.genSalt(10, function(err, salt) {
             if (err) return next(err);
             bcrypt.hash(user.password, salt, function(err, hash) {
