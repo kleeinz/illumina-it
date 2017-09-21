@@ -36,6 +36,7 @@ export class UserFormComponent implements OnInit {
 		private imageService: ImageService) {
 		this.createForm();
 		this.uploader = new FileUploader({url: this.imageService.serverURL, itemAlias: 'image'});
+		this.uploadMessage = 'Choose Image...';
 		// this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
 		//
 		// this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
@@ -59,8 +60,9 @@ export class UserFormComponent implements OnInit {
 
 	public ngOnInit () {
 		this.uploader.onSuccessItem = (item:FileItem, response:string, status:number, headers:ParsedResponseHeaders) => {
-			console.log("onSuccessItem " + JSON.parse(response).message);
-			this.uploadMessage = JSON.parse(response).message;
+			console.log("fileItem: " + item._file.name);
+			console.log("response: " + JSON.parse(response).message);
+			this.uploadMessage = item._file.name;
 		}
 	}
 
