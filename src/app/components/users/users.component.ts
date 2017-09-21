@@ -51,7 +51,8 @@ export class UsersComponent implements OnInit {
                 'username': user.username,
                 'password': user.password,
                 'userType': user.userType,
-								'name': user.name
+								'name': user.name,
+								'image': user.image
             }
         });
   }

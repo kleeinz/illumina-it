@@ -53,6 +53,7 @@ export class UserFormComponent implements OnInit {
 			this.passwordNgModel = this.data.password;
 			this.userTypeNgModel = this.data.userType;
 			this.confirmNgModel = this.data.password;
+			this.imageNgModel = this.data.image;
 		}
 	}
 
