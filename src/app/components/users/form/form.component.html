@@ -53,7 +53,7 @@
 				<span class="input-format-special form-control">{{ uploadMessage }}</span>
 				<span class="input-group-addon background-color-black"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
 		</label>
-		<input formControlName="image" type="hidden">
+		<input [(ngModel)]="imageNgModel" value="imageNgModel" formControlName="image" type="hidden">
 	</div>
 
 </form>

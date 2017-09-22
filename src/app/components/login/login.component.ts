@@ -29,7 +29,7 @@ export class LoginComponent {
 		this.auth = formGroup.value;
 		this.userService.auth<Auth>(this.auth, 'authController').subscribe(
 			success => {
-				return this.router.navigate(['/home']);
+				return this.router.navigate(['/home/users']);
 			},
 			error => {
 				this.message = error;

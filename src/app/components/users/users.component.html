@@ -1,13 +1,14 @@
-<button (click)="onSave()" class="btn float-right add-button">
+
+<button (click)="onSave()" class="btn float-right add-button col-2">
 	Add User <i class="fa fa-plus-circle"></i>
 </button>
+<input class="form-control col-10" [(ngModel)]="filterInput" placeholder="Filter by username">
 <div *ngIf="users && users.length > 0">
 	<table class="table table-color format-table"
 	[mfData]="users | filterDataTable : filterInput : 'users'"
-	#mf="mfDataTable" [mfRowsOnPage]="5" style="table-layout:fixed;">
+	#mf="mfDataTable" [mfRowsOnPage]="3" style="table-layout:fixed;">
 	<thead>
 		<tr class="thead-inverse">
-			<th>Image</th>
 			<th><mfDefaultSorter by="username"> Username </mfDefaultSorter> </th>
 			<th><mfDefaultSorter by="name"> Full Name </mfDefaultSorter> </th>
 			<th><mfDefaultSorter by="userType"> UserType </mfDefaultSorter> </th>
@@ -15,27 +16,21 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by username">
-		</tr>
 		<tr *ngFor="let user of mf.data">
-			<td><img id="image" class="img-fluid" src="http://localhost:3000/images/1506027985718.jpg"/></td>
-			<td>{{ user.username }}</td>
-			<td>{{ user.name }}</td>
-			<td>{{ user.userType }}</td>
 			<td>
-				<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(user)"></i>
-				<i class="fa fa-remove icons icon-remove" (click)="confirm(user)"></i>
+				<img *ngIf="user.image" class="img-fluid img-thumbnail img-format margin-right" [src]="user.image"/>
+				<img *ngIf="!user.image " class="img-fluid img-thumbnail img-format margin-right" src="http://localhost:3000/images/user.png" />
+				{{ user.username }}
+			</td>
+			<td><p class="padding-top-11">{{ user.name }}</p></td>
+			<td><p class="padding-top-11">{{ user.userType }}</p></td>
+			<td>
+				<i class="fa fa-edit icons icon-edit margin-right margin-top-15" (click)="onEdit(user)"></i>
+				<i class="fa fa-remove icons icon-remove margin-top-15" (click)="confirm(user)"></i>
 			</td>
 		</tr>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td>
-				<mfBootstrapPaginator></mfBootstrapPaginator>
-			</td>
-		</tr>
-	</tfoot>
+	<mfBootstrapPaginator></mfBootstrapPaginator>
 </table>
 </div>
 <div *ngIf="!users || users.length < 1">

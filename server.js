@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true}));
 // Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Image Location
+app.use('/images', express.static(path.join(__dirname, './images/')));
+
 // API location
 app.use('/api', routerController);
 

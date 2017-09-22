@@ -53,6 +53,7 @@ export class UserFormComponent implements OnInit {
 			this.userTypeNgModel = this.data.userType;
 			this.confirmNgModel = this.data.password;
 			this.imageNgModel = this.data.image;
+			this.uploadMessage = this.data.image.substring(29, this.data.image.length);
 		}
 	}
 
@@ -60,13 +61,10 @@ export class UserFormComponent implements OnInit {
 		this.uploader.onSuccessItem = (item:FileItem,
 			response:string, status:number,
 			headers:ParsedResponseHeaders) => {
-		//	console.log("fileItem: " + item._file.name);
-			//console.log("response: " + JSON.parse(response).message);
 			this.uploadMessage = item._file.name;
-		//	console.log(JSON.parse(response).data);
 			this.userForm.controls['image'].setValue(JSON.parse(response).data.filePath);
 			this.fileUploaded = JSON.parse(response).data.filename;
-			console.log("Primera imagen: ", this.fileUploaded);
+			console.log("First Image: ", this.fileUploaded);
 		}
 	}
 
