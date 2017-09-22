@@ -53,7 +53,8 @@ export class UserFormComponent implements OnInit {
 			this.userTypeNgModel = this.data.userType;
 			this.confirmNgModel = this.data.password;
 			this.imageNgModel = this.data.image;
-			this.uploadMessage = this.data.image.substring(29, this.data.image.length);
+			this.uploadMessage = (this.data.image) 
+								 ? this.data.image.substring(29, this.data.image.length) : 'Choose Image...';
 		}
 	}
 
