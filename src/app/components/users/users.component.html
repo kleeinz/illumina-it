@@ -19,7 +19,7 @@
 		<tr *ngFor="let user of mf.data">
 			<td>
 				<img *ngIf="user.image" class="img-fluid img-thumbnail img-format margin-right" [src]="user.image"/>
-				<img *ngIf="!user.image " class="img-fluid img-thumbnail img-format margin-right" src="http://localhost:3000/images/user.png" />
+				<img *ngIf="!user.image " class="img-fluid img-thumbnail img-format margin-right" src="../../assets/img/user.png" />
 				{{ user.username }}
 			</td>
 			<td><p class="padding-top-11">{{ user.name }}</p></td>
