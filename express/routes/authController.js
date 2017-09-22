@@ -1,19 +1,28 @@
 const express = require('express');
 const router = express.Router();
-// CONFIGURATION
+/* Configuration properties, ErrorSender and HTTP Codes */
 const config = require('../configs/config');
 const errorSender = require('../configs/ErrorSender');
-const Responser = require('../configs/Responser');
 const status = require('../configs/StatusCodes');
-
+/* Custom Response */
+const Responser = require('../configs/Responser');
+/* library JSON WEB TOKEN */
 const jwt = require('jsonwebtoken');
+/* User Schema */
 const User = require('../models/users');
+/* Library to encrypt password and comparate a password encrypted */
 const bcrypt = require('bcrypt');
 
 
 const app = express();
 app.set('superSecret', config.secret);
 
+/* auth web service to login
+* This method find a user in MongoDB through username, if the user exists
+* the method compare the plain password with the encrypted password in the database
+* if everything is correct create a new token to the user, if not return that
+*
+*/
 router.post('/auth', (request, response) => {
     console.log(request.body);
     User.findOne({ 'username': request.body.username })
@@ -35,7 +44,7 @@ router.post('/auth', (request, response) => {
                response.status(status.codes.ok).json(new Responser([{
                   'user': success,
                   'token': token
-              }], status.codes.ok, 'The user has been created.'));
+              }], status.codes.ok, 'The user has been logged.'));
            }
         });
     }).catch(err => {

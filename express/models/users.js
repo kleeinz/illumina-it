@@ -1,7 +1,10 @@
+/* User Schema */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+/* Library to encrypt password and comparate a password encrypted */
 const bcrypt = require('bcrypt');
 
+/* Schema definition */
 const usersSchema = new Schema({
 	username: { type: String, required: true, unique: true, lowercase:true, trim:true },
 	name: { type: String, required: true, lowercase:true},
@@ -10,6 +13,7 @@ const usersSchema = new Schema({
 	image: { type: String }
 });
 
+/* HOOK Mongoose Save is used to encrypt the user password before to save the user */
 usersSchema.pre('save', function(next) {
     if(bcrypt){
         var user = this;

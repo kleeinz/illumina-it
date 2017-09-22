@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
+/* library JSON WEB TOKEN */
 const jwt = require('jsonwebtoken');
 
-// CONFIGURATION
+/* Configuration properties, ErrorSender and HTTP Codes */
 const config = require('../configs/config');
 const errorSender = require('../configs/ErrorSender');
 const status = require('../configs/StatusCodes');
 
-
+/* Middleware to verify Token */
 router.use((request, response, next) => {
 	let token = request.body.token || request.query.token || request.headers['x-access-token'];
 	if(token) {

@@ -1,3 +1,4 @@
+/* Properties file HTTP Status Code */
 module.exports = {
 
   'codes' : {

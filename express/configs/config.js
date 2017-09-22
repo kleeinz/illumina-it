@@ -1,3 +1,4 @@
+/* Config Properties */
 module.exports = {
 
     'secret': 'authentication-token',
