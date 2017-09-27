@@ -16,6 +16,7 @@ import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
 export class UsersComponent implements OnInit {
 	private users: Array<User>;
 	public filterInput:string;
+  private isAdmin: boolean;
 
 	constructor(public dialog: MdDialog,
 		private dialogService: DialogService,
@@ -27,10 +28,17 @@ export class UsersComponent implements OnInit {
           this.populateDatatable();
         }
       );
+
+      if (localStorage.getItem("userLogged") && JSON.parse(localStorage.getItem("userLogged")).user.userType === 'admin') {
+          this.isAdmin = true;
+          // console.log("Es admin? ", this.isAdmin);
+      }
+
 	}
 
 	public ngOnInit() {
 		this.populateDatatable();
+
 	}
 
 	private onSave() {
