@@ -1,6 +1,7 @@
-<button (click)="onSave()" class="btn float-right add-button">
+<button [disabled]="!isAdmin" (click)="onSave()" class="btn float-right add-button col-2">
 	Add Client <i class="fa fa-plus-circle"></i>
 </button>
+<input class="form-control col-10" [(ngModel)]="filterInput" placeholder="Filter by name">
 <div *ngIf="clients && clients.length > 0">
 	<table class="table table-color format-table"
 	[mfData]="clients | filterDataTable : filterInput : 'clients'"
@@ -17,9 +18,6 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<input class="form-control" [(ngModel)]="filterInput" placeholder="Filter by name">
-		</tr>
 		<tr *ngFor="let client of mf.data">
 			<td>{{ client.name }}</td>
 			<td>{{ client.phone }}</td>
@@ -28,18 +26,19 @@
 			<td>{{ client.age }}</td>
 			<td>{{ client.profession }}</td>
 			<td>
-				<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(client)"></i>
-				<i class="fa fa-remove icons icon-remove" (click)="confirm(client)"></i>
+
+				<button type="button" class="appears-like-button" [disabled]="!isAdmin" (click)="onEdit(client)"> 
+					<i class="fa fa-edit icons icon-edit margin-right margin-top-15"></i>
+				</button>
+				<button type="button" class="appears-like-button" [disabled]="!isAdmin" (click)="confirm(client)"> 
+					<i class="fa fa-remove icons icon-remove margin-top-15" ></i>
+				</button>		
+<!-- 				<i class="fa fa-edit icons icon-edit margin-right" (click)="onEdit(client)"></i>
+				<i class="fa fa-remove icons icon-remove" (click)="confirm(client)"></i> -->
 			</td>
 		</tr>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td>
-				<mfBootstrapPaginator></mfBootstrapPaginator>
-			</td>
-		</tr>
-	</tfoot>
+	<mfBootstrapPaginator></mfBootstrapPaginator>
 </table>
 </div>
 <div *ngIf="!clients || clients.length < 1">

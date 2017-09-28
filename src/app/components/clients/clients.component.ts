@@ -16,6 +16,7 @@ import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
 export class ClientsComponent implements OnInit {
 	private clients: Array<Client>;
 	public filterInput:string;
+  private isAdmin:boolean;
 
 	constructor(public dialog: MdDialog,
 		private dialogService: DialogService,
@@ -30,13 +31,17 @@ export class ClientsComponent implements OnInit {
 	}
 
 	public ngOnInit() {
-		this.populateDatatable();
+		let userStorage = localStorage.getItem("userLogged");
+    if (userStorage && JSON.parse(userStorage).user.userType === 'admin') {
+        this.isAdmin = true;
+    }  
+    this.populateDatatable();
 	}
 
 	private onSave() {
 				this.sharedService.data = null;
         const dialogRef = this.dialog.open(DialogClientForm, {
-            height: '550px',
+            height: '600px',
             width: '400px'
         });
   }
@@ -44,7 +49,7 @@ export class ClientsComponent implements OnInit {
   private onEdit(client: Client) {
         console.log("client", client);
         const dialogRef = this.dialog.open(DialogClientForm, {
-            height: '550px',
+            height: '600px',
             width: '400px',
             data: {
 							'_id': client._id,

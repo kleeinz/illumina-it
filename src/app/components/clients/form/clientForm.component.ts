@@ -20,7 +20,7 @@ export class ClientFormComponent {
 	private marriedNgModel: boolean;
 	private genderNgModel: string;
 	private ageNgModel: string;
-  private professionNgModel: string;
+  	private professionNgModel: string;
 	private readOnly:boolean;
 	private idNgModel:string;
 	private data:any;

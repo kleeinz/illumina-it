@@ -87,10 +87,10 @@ export class UserFormComponent implements OnInit {
 			passwords: this.formBuilder.group({
 				password: ['', Validators.required],
 				confirm: ['', Validators.required]
-			}, { validator: this.validatePassword }),
+			}, { validator: this.passwordMatchValidator }),
 			username: ['', Validators.required],
 			userType: ['User', Validators.required],
-			image: ['', Validators.required]
+			image: ['']
 		})
 	}
 
@@ -152,8 +152,8 @@ export class UserFormComponent implements OnInit {
 		return this.sharedService.data;
 	}
 
-	private validatePassword(abstractControl: AbstractControl): { invalid: boolean } {
-		if (abstractControl.get('pass') !== abstractControl.get('confirm'))
-			return { invalid: true };
+	private passwordMatchValidator(group: FormGroup) {
+		return group.get('password').value === group.get('confirm').value
+      	? null : {'valid': true};
 	}
 }

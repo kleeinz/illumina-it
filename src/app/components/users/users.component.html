@@ -1,5 +1,5 @@
 
-<button (click)="onSave()" class="btn float-right add-button col-2">
+<button [disabled]="!isAdmin" (click)="onSave()" class="btn float-right add-button col-2">
 	Add User <i class="fa fa-plus-circle"></i>
 </button>
 <input class="form-control col-10" [(ngModel)]="filterInput" placeholder="Filter by username">

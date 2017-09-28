@@ -30,7 +30,7 @@ router.post('/auth', (request, response) => {
         if (!success)
             response.status(status.codes.notFound)
             .json(new Responser(success, status.codes.notFound, 'Username or password are not correct.'));
-        bcrypt.compare(request.body.password, success.password, (err, callback) =>{
+        bcrypt.compare(request.body.password, success.password, (err, callback) => {
             if(err) throw err;
             if(!callback) {
                 response.status(status.codes.notFound)
@@ -38,7 +38,7 @@ router.post('/auth', (request, response) => {
             }
             else {
                let token = jwt.sign({
-                exp: 60,
+                exp: 60*60*24,
             }, app.get('superSecret'));
                console.log("Authenticating user in the system, Username: ", success.username);
                response.status(status.codes.ok).json(new Responser([{

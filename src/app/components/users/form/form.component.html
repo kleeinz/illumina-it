@@ -1,5 +1,5 @@
 <input type="hidden" [(ngModel)]="idNgModel" value="idNgModel">
-<form [formGroup]="userForm" novalidate>
+<form [formGroup]="userForm">
 	<div class="form-group">
 		<div class="input-group">
 			<input [readonly]="readOnly" [(ngModel)]="usernameNgModel" value="usernameNgModel" formControlName="username" type="text" class="form-control input-format" placeholder="Username">

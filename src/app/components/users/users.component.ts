@@ -28,10 +28,9 @@ export class UsersComponent implements OnInit {
           this.populateDatatable();
         }
       );
-
-      if (localStorage.getItem("userLogged") && JSON.parse(localStorage.getItem("userLogged")).user.userType === 'admin') {
+      let userStorage = localStorage.getItem("userLogged");
+      if (userStorage && JSON.parse(userStorage).user.userType === 'admin') {
           this.isAdmin = true;
-          // console.log("Es admin? ", this.isAdmin);
       }
 
 	}
