@@ -44,7 +44,6 @@ export class AuthService {
 	}
 
 	private extractData(res: Response):string {
-		console.log(res);
 		let body = res.json();
 		return body || {};
 	}
@@ -52,7 +51,6 @@ export class AuthService {
 	private handleError(error: any) {
 		let errMsg = (error.message) ? error.message :
 		error.status ? `${JSON.parse(error._body).message}` : 'Unable connect to server';
-		console.error(errMsg);
 		return Observable.throw(errMsg);
 	}
 }

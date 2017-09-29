@@ -24,7 +24,6 @@ app.set('superSecret', config.secret);
 *
 */
 router.post('/auth', (request, response) => {
-    console.log(request.body);
     User.findOne({ 'username': request.body.username })
     .then(success => {
         if (!success)
@@ -40,7 +39,6 @@ router.post('/auth', (request, response) => {
                let token = jwt.sign({
                 exp: 60*60*24,
             }, app.get('superSecret'));
-               console.log("Authenticating user in the system, Username: ", success.username);
                response.status(status.codes.ok).json(new Responser([{
                   'user': success,
                   'token': token
@@ -48,7 +46,6 @@ router.post('/auth', (request, response) => {
            }
         });
     }).catch(err => {
-        console.log({ err: err }, 'Unable to login');
         errorSender(err, response, status.codes.server);
     });
 

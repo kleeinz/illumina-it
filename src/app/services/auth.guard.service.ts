@@ -12,7 +12,6 @@ export class AuthGuardService implements CanActivate {
 
   public canActivate():boolean {
   if (localStorage.getItem('userLogged')) {
-    console.log("LocalStorage: ", localStorage.getItem('userLogged'));
     const userLogged = JSON.parse(localStorage.getItem('userLogged'));
     if (!this.authService.user){
       this.authService.token = userLogged.token;

@@ -41,7 +41,6 @@ export class UserFormComponent implements OnInit {
 		this.uploadMessage = 'Choose Image...';
 		this.data = this.getData();
 		this.userTypeNgModel = 'user';
-		console.log(this.data);
 		if (this.data){
 			if (this.data.username) {
 				this.readOnly = true;
@@ -65,13 +64,11 @@ export class UserFormComponent implements OnInit {
 			this.uploadMessage = item._file.name;
 			this.userForm.controls['image'].setValue(JSON.parse(response).data.filePath);
 			this.fileUploaded = JSON.parse(response).data.filename;
-			console.log("First Image: ", this.fileUploaded);
 		}
 	}
 
 	private uploadImg() {
 		if (this.fileUploaded) {
-			console.log("fileUploaded: ", this.fileUploaded);
 			this.imageService.delete("deleteImg",this.fileUploaded).subscribe(success => {
 				return success;
 			}, error => {
@@ -95,15 +92,12 @@ export class UserFormComponent implements OnInit {
 	}
 
 	public onSave(formGroup: FormGroup):any {
-		console.log(JSON.stringify(formGroup.value));
 		this.user = formGroup.value;
 		if(this.data)
 			this.user._id = this.idNgModel;
 		this.genericService.save<User>(this.user, 'userController').subscribe(
 			success => {
-				console.log(success.message);
 				this.message = success.message;
-				console.log(this.message);
 				this.color = 'success-color';
 				this.refreshTable();
 				this.dialog.close();
@@ -118,17 +112,13 @@ export class UserFormComponent implements OnInit {
 	}
 
 	public onUpdate(formGroup: FormGroup):any {
-		console.log(JSON.stringify(formGroup.value));
 		this.user = formGroup.value;
 		if(this.data)
 			this.user._id = this.idNgModel;
 		this.user.isModified = this.userForm.get(['passwords','password']).dirty;
-		console.log("isModified: ", this.user.isModified);
 		this.genericService.update<User>(this.user, 'userController').subscribe(
 			success => {
-				console.log(success.message);
 				this.message = success.message;
-				console.log(this.message);
 				this.color = 'success-color';
 				this.refreshTable();
 				this.dialog.close();
@@ -143,12 +133,10 @@ export class UserFormComponent implements OnInit {
 	}
 
 	private refreshTable() {
-		console.log("Executing refresh table");
 		this.sharedService.callComponentMethod();
 	}
 
 	private getData() {
-		console.log("Getting data");
 		return this.sharedService.data;
 	}
 

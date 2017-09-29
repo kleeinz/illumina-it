@@ -3,6 +3,6 @@
   <user-form #validator></user-form>
 </md-dialog-content>
 <md-dialog-actions>
-  <button [disabled]="!validator.userForm.valid" (click)="onSubmit()" class="margin-right btn background-color font-color-button hover-button" tabindex="1">Save</button>
+  <button [disabled]="validator.userForm && !validator.userForm.valid" (click)="onSubmit()" class="margin-right btn background-color font-color-button hover-button" tabindex="1">Save</button>
   <button class="btn hover-button font-color-button main-color-button" md-button md-dialog-close tabindex="-1">Cancel</button>
 </md-dialog-actions>

@@ -1,9 +1,9 @@
 export interface Client {
 	_id: String,
-  name: String,
+ 	name: String,
 	phone: String,
 	married: boolean,
 	gender: String,
-  age: number,
-  profession: String
+  	age: number,
+ 	profession: String
 }

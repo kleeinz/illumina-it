@@ -25,7 +25,6 @@ export class LoginComponent {
 	}
 
 	public onSubmit(formGroup: FormGroup) {
-		console.log(JSON.stringify(formGroup.value));
 		this.auth = formGroup.value;
 		this.userService.auth<Auth>(this.auth, 'authController').subscribe(
 			success => {

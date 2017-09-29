@@ -17,21 +17,17 @@ export class ConfirmClientDialog {
   }
 
   private onDelete() {
-    console.log("OnDelete", this.data);
     this.genericService.delete(this.data, 'clientController').subscribe(
       success => {
-        console.log(success);
         this.dialog.close();
         this.refreshTable();
         return success;
     }, error => {
-        console.log(error);
         return error;
     });
   }
 
   private refreshTable() {
-    console.log("Executing refresh table");
     this.sharedService.callComponentMethod();
   }
 

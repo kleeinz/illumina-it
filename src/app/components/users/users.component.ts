@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit {
 	  private sharedService: SharedService) {
 			this.sharedService.componentMethodCalled.subscribe(
         () => {
-					console.log("Executing populateDatatable");
           this.populateDatatable();
         }
       );
@@ -49,7 +48,6 @@ export class UsersComponent implements OnInit {
   }
 
   private onEdit(user: User) {
-        console.log("user", user);
         const dialogRef = this.dialog.open(DialogForm, {
             height: '600px',
             width: '400px',
@@ -79,7 +77,6 @@ export class UsersComponent implements OnInit {
     		this.users = success.data as User[];
     		return success.data;
     	}, error => {
-    		console.log(error);
     		return error;
     	});
   }

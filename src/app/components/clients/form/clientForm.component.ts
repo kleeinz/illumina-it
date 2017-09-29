@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Client } from '../../../models/client.model';
 import { GenericService } from '../../../services/generic.service';
@@ -33,7 +33,6 @@ export class ClientFormComponent {
 		this.data = this.getData();
 		this.marriedNgModel = false;
 		this.genderNgModel = 'male';
-		console.log(this.data);
 		if (this.data){
 			if (this.data.name) {
 				this.readOnly = true;
@@ -44,32 +43,28 @@ export class ClientFormComponent {
 			this.marriedNgModel = this.data.married;
 			this.genderNgModel = this.data.gender;
 			this.ageNgModel = this.data.age;
-      this.professionNgModel = this.data.profession;
-    }
+     		this.professionNgModel = this.data.profession;
+   		}
 	}
 
 	public createForm() {
 		this.clientForm = this.formBuilder.group({
 			name: ['', Validators.required],
-      phone: ['', Validators.required],
-      married: [false, Validators.required],
-      gender: ['male', Validators.required],
-      age: [0, Validators.required],
-      profession: ['', Validators.required],
-
+      		phone: ['', Validators.required],
+      		married: [false, Validators.required],
+      		gender: ['male', Validators.required],
+      		age: [0, Validators.required],
+      		profession: ['', Validators.required]
 		})
 	}
 
 	public onSave(formGroup: FormGroup):any {
-		console.log(JSON.stringify(formGroup.value));
 		this.client = formGroup.value;
 		if(this.data)
 			this.client._id = this.idNgModel;
 		this.genericService.save<Client>(this.client, 'clientController').subscribe(
 			success => {
-				console.log(success.message);
 				this.message = success.message;
-				console.log(this.message);
 				this.color = 'success-color';
 				this.refreshTable();
 				this.dialog.close();
@@ -84,15 +79,12 @@ export class ClientFormComponent {
 	}
 
 	public onUpdate(formGroup: FormGroup):any {
-		console.log(JSON.stringify(formGroup.value));
 		this.client = formGroup.value;
 		if(this.data)
 			this.client._id = this.idNgModel;
 		this.genericService.update<Client>(this.client, 'clientController').subscribe(
 			success => {
-				console.log(success.message);
 				this.message = success.message;
-				console.log(this.message);
 				this.color = 'success-color';
 				this.refreshTable();
 				this.dialog.close();
@@ -107,12 +99,10 @@ export class ClientFormComponent {
 	}
 
 	private refreshTable() {
-		console.log("Executing refresh table");
 		this.sharedService.callComponentMethod();
 	}
 
 	private getData() {
-		console.log("Getting data");
 		return this.sharedService.data;
 	}
 

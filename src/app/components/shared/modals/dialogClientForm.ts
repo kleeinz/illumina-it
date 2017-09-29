@@ -1,4 +1,4 @@
-import {Component, Inject, ViewChild} from '@angular/core';
+import {Component, Inject, ViewChild, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef, MdDialog } from '@angular/material';
 import { ClientFormComponent } from '../../clients/form/clientForm.component';
 import { SharedService } from '../../../services/shared.service';
@@ -7,15 +7,18 @@ import { SharedService } from '../../../services/shared.service';
   selector: 'dialogClientForm',
   templateUrl: './dialogClientForm.html',
 })
-export class DialogClientForm {
+export class DialogClientForm implements AfterViewInit{
 
   @ViewChild(ClientFormComponent) ClientFormComponent: ClientFormComponent;
 
-  constructor(@Inject(MD_DIALOG_DATA) public data: any, private sharedService: SharedService) {
+  constructor(@Inject(MD_DIALOG_DATA) public data: any, private sharedService: SharedService, private cd: ChangeDetectorRef) {
   	if(data) {
-      console.log("data: ", data);
       this.sharedService.data = data;
     }
+  }
+
+  ngAfterViewInit() {
+      this.cd.detectChanges();
   }
 
   public onSubmit() {

@@ -24,7 +24,6 @@ export class ClientsComponent implements OnInit {
 	  private sharedService: SharedService) {
 			this.sharedService.componentMethodCalled.subscribe(
         () => {
-					console.log("Executing populateDatatable");
           this.populateDatatable();
         }
       );
@@ -47,7 +46,6 @@ export class ClientsComponent implements OnInit {
   }
 
   private onEdit(client: Client) {
-        console.log("client", client);
         const dialogRef = this.dialog.open(DialogClientForm, {
             height: '600px',
             width: '400px',
@@ -75,11 +73,9 @@ export class ClientsComponent implements OnInit {
 
   private populateDatatable():any {
     	this.genericService.find<Client>('clientController').subscribe(success => {
-				console.log("Success:  " + success.body);
 				this.clients = success.data as Client[];
     		return success.data;
     	}, error => {
-    		console.log(error);
     		return error;
     	});
   }
