@@ -12,14 +12,17 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
 
+/* Calling all files that will be the controllers in the application */
 const authController = require('./authController');
 const userController = require('./userController');
 const clientController = require('./clientController');
 const imageController = require('./imageController');
 
+/* Asigning the controllers to the router */
 router.use('/userController', userController);
 router.use('/authController', authController);
 router.use('/clientController', clientController);
 router.use('/imageController', imageController);
 
+/* Exporting the router */
 module.exports = router;

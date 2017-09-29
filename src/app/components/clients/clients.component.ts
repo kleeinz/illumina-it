@@ -72,7 +72,7 @@ export class ClientsComponent implements OnInit {
   }
 
   private populateDatatable():any {
-    	this.genericService.find<Client>('clientController').subscribe(success => {
+    	this.genericService.find('clientController').subscribe(success => {
 				this.clients = success.data as Client[];
     		return success.data;
     	}, error => {

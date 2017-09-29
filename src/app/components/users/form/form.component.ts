@@ -31,6 +31,14 @@ export class UserFormComponent implements OnInit {
 	private uploader:FileUploader;
 	private imageNgModel: string;
 
+	/**
+	* Injections
+	* @param formBuilder The injection of the FormBuilder component
+	* @param genericService The injection of the generic service
+	* @param dialog The injection of the MdDialogRef with the corresponding DialogForm to use
+	* @param imageService The image service to upload the image
+	* Also in the constructor is declared the user form and the input file to upload de image
+	*/
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<User>,
 		private dialog:MdDialogRef<DialogForm>,
@@ -41,7 +49,10 @@ export class UserFormComponent implements OnInit {
 		this.uploadMessage = 'Choose Image...';
 		this.data = this.getData();
 		this.userTypeNgModel = 'user';
+		// If the data exists the values of the data are assigned to each NgModel of the form.
+		// This is for populating the user form when you want to edit any user.
 		if (this.data){
+			// This condition is for blocking the username input
 			if (this.data.username) {
 				this.readOnly = true;
 			}
@@ -57,6 +68,10 @@ export class UserFormComponent implements OnInit {
 		}
 	}
 
+	/**
+	This hook checks if the image was correctly uploaded and put its name in the input file.
+	Also sets the image filePath in a hidden input in the form to ease the storage in the database the next time.
+	*/
 	public ngOnInit () {
 		this.uploader.onSuccessItem = (item:FileItem,
 			response:string, status:number,
@@ -67,6 +82,10 @@ export class UserFormComponent implements OnInit {
 		}
 	}
 
+	/*
+	This method upload the image. If the form hasn't saved and the image is changed. Then
+	remove the current image from the server and add the new image to the server.
+	*/
 	private uploadImg() {
 		if (this.fileUploaded) {
 			this.imageService.delete("deleteImg",this.fileUploaded).subscribe(success => {
@@ -78,6 +97,7 @@ export class UserFormComponent implements OnInit {
 		this.uploader.uploadAll();
 	}
 
+	/* This method creates the user form and its validations */
 	public createForm() {
 		this.userForm = this.formBuilder.group({
 			name: ['', Validators.required],
@@ -91,11 +111,17 @@ export class UserFormComponent implements OnInit {
 		})
 	}
 
+	/**
+	* This method calls a web service called save to store a new user in the database.
+	* If the web service throws an ok status then the method will call to the refresh table method and will change any css styles.
+	* If the web service throws an error status then the method will show the corresponding error message with its css styles.
+	* @param formGroup is the formGroup to Save
+	*/
 	public onSave(formGroup: FormGroup):any {
 		this.user = formGroup.value;
 		if(this.data)
 			this.user._id = this.idNgModel;
-		this.genericService.save<User>(this.user, 'userController').subscribe(
+		this.genericService.save(this.user, 'userController').subscribe(
 			success => {
 				this.message = success.message;
 				this.color = 'success-color';
@@ -111,12 +137,18 @@ export class UserFormComponent implements OnInit {
 			);
 	}
 
+	/**
+	* This method calls a web service called save to update a user in the database.
+	* If the web service throws an ok status then the method will call to the refresh table method and will change any css styles.
+	* If the web service throws an error status then the method will show the corresponding error message with its css styles.
+	* @param formGroup is the formGroup to Save
+	*/
 	public onUpdate(formGroup: FormGroup):any {
 		this.user = formGroup.value;
 		if(this.data)
 			this.user._id = this.idNgModel;
 		this.user.isModified = this.userForm.get(['passwords','password']).dirty;
-		this.genericService.update<User>(this.user, 'userController').subscribe(
+		this.genericService.update(this.user, 'userController').subscribe(
 			success => {
 				this.message = success.message;
 				this.color = 'success-color';
@@ -132,14 +164,28 @@ export class UserFormComponent implements OnInit {
 			);
 	}
 
+	/*
+		This method calls a shared service that contains the method to update the table
+		from users.component.ts
+	*/
 	private refreshTable() {
 		this.sharedService.callComponentMethod();
 	}
 
+	/*
+	This method get information about the user to show the edit form with the user information preloaded
+	in the form.
+	*/
 	private getData() {
 		return this.sharedService.data;
 	}
 
+	/**
+	* This method validates the password and the confirm password inputs, if the password is valid
+	* then the passwords form group will be valid. But if is a distinct case the passwords form group
+	* will be invalid and the disable button to save will be true.
+	* @param group The group password with the controls password and confirm
+	*/
 	private passwordMatchValidator(group: FormGroup) {
 		return group.get('password').value === group.get('confirm').value
       	? null : {'valid': true};

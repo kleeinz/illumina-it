@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from "ng2-bootstrap-modal";
 import { GenericService } from '../../services/generic.service';
 import { SharedService } from '../../services/shared.service';
 import { User } from '../../models/user.model';
@@ -17,16 +16,23 @@ export class UsersComponent implements OnInit {
 	private users: Array<User>;
 	public filterInput:string;
   private isAdmin: boolean;
-
-	constructor(public dialog: MdDialog,
-		private dialogService: DialogService,
+  
+  /**
+  The constructor initialize the variables declared above.
+  @param dialog The injection of the Mdialog from the material library
+  @param genericService The injection of GenericService
+  @param sharedService The injection of the SharedService to use methods between components and send information
+  */
+  constructor(public dialog: MdDialog,
 		private genericService: GenericService<User>,
 	  private sharedService: SharedService) {
-			this.sharedService.componentMethodCalled.subscribe(
+			// Subscribing the shared service for sending the populateDatatable method
+      this.sharedService.componentMethodCalled.subscribe(
         () => {
           this.populateDatatable();
         }
       );
+      // Allowing permissions
       let userStorage = localStorage.getItem("userLogged");
       if (userStorage && JSON.parse(userStorage).user.userType === 'admin') {
           this.isAdmin = true;
@@ -34,11 +40,13 @@ export class UsersComponent implements OnInit {
 
 	}
 
+  /* Hook that initialize the datatable in the view */
 	public ngOnInit() {
 		this.populateDatatable();
 
 	}
 
+  /* Method in the component for building the DialogForm with dialogRef service of material.io */
 	private onSave() {
 				this.sharedService.data = null;
         const dialogRef = this.dialog.open(DialogForm, {
@@ -47,6 +55,9 @@ export class UsersComponent implements OnInit {
         });
   }
 
+  /* Method in the component for building the DialogForm with dialogRef service of material.io 
+    This method also sends the user information with its data property
+  */
   private onEdit(user: User) {
         const dialogRef = this.dialog.open(DialogForm, {
             height: '600px',
@@ -62,6 +73,7 @@ export class UsersComponent implements OnInit {
         });
   }
 
+  /* Method in the component for building the ConfirmDialog with dialogRef service of material.io */
   private confirm(user: User) {
         const dialogRef = this.dialog.open(ConfirmDialog, {
             height: '200px',
@@ -72,8 +84,12 @@ export class UsersComponent implements OnInit {
         })
   }
 
+  /**
+  * This method calls to the find method in the GenericService to get all users in the database
+  * @return any a list of users 
+  */
   private populateDatatable():any {
-    	this.genericService.find<User>('userController').subscribe(success => {
+    	this.genericService.find('userController').subscribe(success => {
     		this.users = success.data as User[];
     		return success.data;
     	}, error => {

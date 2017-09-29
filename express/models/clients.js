@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/* Schema Definition */
+/* Client Schema Definition */
 const clientsSchema = new Schema({
 	name: { type: String, required: true, unique: true, lowercase:true },
 	phone: { type: String },
@@ -12,6 +12,6 @@ const clientsSchema = new Schema({
     profession: { type: String }
 });
 
-/* Exporting the Clients */
+/* Exporting the ClientSchema to use in other files */
 const Client = mongoose.model('Clients', clientsSchema);
 module.exports = Client;
