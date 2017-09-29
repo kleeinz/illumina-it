@@ -9,12 +9,13 @@ const APP_ROUTES: Routes = [
 	{ path: 'home', component: HomeComponent,
 		children:[
 			{ path: 'users', component: UsersComponent, canActivate: [AuthGuardService] },
-			{ path: 'clients', component: ClientsComponent, canActivate: [AuthGuardService] }
+			{ path: 'clients', component: ClientsComponent, canActivate: [AuthGuardService] },
+			{ path: '', redirectTo: 'users', pathMatch: 'full', canActivate: [AuthGuardService]}
 		],
 		canActivate: [AuthGuardService]
 	},
 	{ path: 'login', component: LoginComponent },
-	{ path: '**', pathMatch: 'full', redirectTo: 'login', canActivate: [AuthGuardService] }
+	{ path: '**', pathMatch: 'full', redirectTo: 'home', canActivate: [AuthGuardService] }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);
