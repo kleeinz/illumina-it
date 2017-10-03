@@ -3,8 +3,8 @@ import { GenericService } from '../../services/generic.service';
 import { SharedService } from '../../services/shared.service';
 import { User } from '../../models/user.model';
 import { MdDialog } from '@angular/material';
-import { DialogForm } from '../shared/modals/dialogForm';
-import { ConfirmDialog } from '../shared/modals/confirmDialog';
+import { UserFormDialog } from '../shared/modals/user/user.form.dialog';
+import { ConfirmUserDialog } from '../shared/modals/user/confirm.user.dialog';
 import { FilterDataTablePipe } from '../shared/pipes/filter-datatable.pipe';
 import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
 
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
   /* Method in the component for building the DialogForm with dialogRef service of material.io */
 	private onSave() {
 				this.sharedService.data = null;
-        const dialogRef = this.dialog.open(DialogForm, {
+        const dialogRef = this.dialog.open(UserFormDialog, {
             height: '600px',
             width: '400px'
         });
@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
     This method also sends the user information with its data property
   */
   private onEdit(user: User) {
-        const dialogRef = this.dialog.open(DialogForm, {
+        const dialogRef = this.dialog.open(UserFormDialog, {
             height: '600px',
             width: '400px',
             data: {
@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
 
   /* Method in the component for building the ConfirmDialog with dialogRef service of material.io */
   private confirm(user: User) {
-        const dialogRef = this.dialog.open(ConfirmDialog, {
+        const dialogRef = this.dialog.open(ConfirmUserDialog, {
             height: '200px',
             width: '500px',
 						data: {

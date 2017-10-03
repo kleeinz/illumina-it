@@ -4,11 +4,11 @@ import { Client } from '../../../models/client.model';
 import { GenericService } from '../../../services/generic.service';
 import { SharedService } from '../../../services/shared.service';
 import { MdDialogRef } from '@angular/material';
-import { DialogClientForm } from '../../shared/modals/dialogClientForm';
+import { ClientFormDialog } from '../../shared/modals/client/client.form.dialog';
 
 @Component({
 	selector: 'client-form',
-	templateUrl: 'clientForm.component.html',
+	templateUrl: 'client.form.component.html',
 })
 export class ClientFormComponent {
 	
@@ -28,7 +28,7 @@ export class ClientFormComponent {
 
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<Client>,
-		private dialog:MdDialogRef<DialogClientForm>,
+		private dialog:MdDialogRef<ClientFormDialog>,
 		private sharedService: SharedService) {
 		this.createForm();
 		this.data = this.getData();

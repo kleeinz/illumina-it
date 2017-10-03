@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef, MdDialog } from '@angular/material';
-import { GenericService } from '../../../services/generic.service';
-import { SharedService } from '../../../services/shared.service';
-import { Client } from '../../../models/client.model';
-import { ClientsComponent } from '../../clients/clients.component';
+import { GenericService } from '../../../../services/generic.service';
+import { SharedService } from '../../../../services/shared.service';
+import { Client } from '../../../../models/client.model';
+import { ClientsComponent } from '../../../clients/clients.component';
 @Component({
-  selector: 'confirmClientRemove',
-  templateUrl: './confirmClient.html',
+  selector: 'confirm-client-dialog',
+  templateUrl: './confirm.client.dialog.html',
 })
 export class ConfirmClientDialog {
 

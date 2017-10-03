@@ -1,13 +1,13 @@
 import {Component, Inject, ViewChild, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import { MD_DIALOG_DATA, MdDialogRef, MdDialog } from '@angular/material';
-import { UserFormComponent } from '../../users/form/form.component';
-import { SharedService } from '../../../services/shared.service';
+import { UserFormComponent } from '../../../users/form/user.form.component';
+import { SharedService } from '../../../../services/shared.service';
 
 @Component({
-  selector: 'dialogForm',
-  templateUrl: './dialogForm.html',
+  selector: 'user-form-dialog',
+  templateUrl: './user.form.dialog.html',
 })
-export class DialogForm implements AfterViewInit {
+export class UserFormDialog implements AfterViewInit {
 
   @ViewChild(UserFormComponent) UserFormComponent: UserFormComponent;
 

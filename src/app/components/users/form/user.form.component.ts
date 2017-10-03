@@ -5,12 +5,12 @@ import { GenericService } from '../../../services/generic.service';
 import { SharedService } from '../../../services/shared.service';
 import { ImageService } from '../../../services/image.service';
 import { MdDialogRef } from '@angular/material';
-import { DialogForm } from '../../shared/modals/dialogForm';
+import { UserFormDialog } from '../../shared/modals/user/user.form.dialog';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload/ng2-file-upload';
 
 @Component({
 	selector: 'user-form',
-	templateUrl: 'form.component.html',
+	templateUrl: 'user.form.component.html',
 })
 export class UserFormComponent implements OnInit {
 	protected user: User;
@@ -41,7 +41,7 @@ export class UserFormComponent implements OnInit {
 	*/
 	constructor(private formBuilder: FormBuilder,
 		private genericService: GenericService<User>,
-		private dialog:MdDialogRef<DialogForm>,
+		private dialog:MdDialogRef<UserFormDialog>,
 		private sharedService: SharedService,
 		private imageService: ImageService) {
 		this.createForm();

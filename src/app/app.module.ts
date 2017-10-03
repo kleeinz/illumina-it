@@ -28,14 +28,16 @@ import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { ClientsComponent } from './components/clients/clients.component';
-import { DialogForm } from './components/shared/modals/dialogForm';
-import { ConfirmDialog } from './components/shared/modals/confirmDialog';
-import { DialogClientForm } from './components/shared/modals/dialogClientForm';
-import { ConfirmClientDialog } from './components/shared/modals/confirmClient';
-import { UserFormComponent } from './components/users/form/form.component';
+import { UserFormDialog } from './components/shared/modals/user/user.form.dialog';
+import { ConfirmUserDialog } from './components/shared/modals/user/confirm.user.dialog';
+import { ClientFormDialog } from './components/shared/modals/client/client.form.dialog';
+import { ConfirmClientDialog } from './components/shared/modals/client/confirm.client.dialog';
+import { UserFormComponent } from './components/users/form/user.form.component';
+import { ClientFormComponent } from './components/clients/form/client.form.component';
+
+// Pipes
 import { FilterDataTablePipe } from './components/shared/pipes/filter-datatable.pipe';
 import { HidePasswordPipe } from './components/shared/pipes/hide-password.pipe';
-import { ClientFormComponent } from './components/clients/form/clientForm.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +48,9 @@ import { ClientFormComponent } from './components/clients/form/clientForm.compon
   ClientsComponent,
   UserFormComponent,
   ClientFormComponent,
-  DialogForm,
-  ConfirmDialog,
-  DialogClientForm,
+  UserFormDialog,
+  ConfirmUserDialog,
+  ClientFormDialog,
   ConfirmClientDialog,
   FilterDataTablePipe,
   HidePasswordPipe,
@@ -68,9 +70,9 @@ import { ClientFormComponent } from './components/clients/form/clientForm.compon
   FormsModule
   ],
   entryComponents: [
-  DialogForm,
-  ConfirmDialog,
-  DialogClientForm,
+  UserFormDialog,
+  ConfirmUserDialog,
+  ClientFormDialog,
   ConfirmClientDialog
   ],
   providers: [

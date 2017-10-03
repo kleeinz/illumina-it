@@ -4,8 +4,8 @@ import { GenericService } from '../../services/generic.service';
 import { SharedService } from '../../services/shared.service';
 import { Client } from '../../models/client.model';
 import { MdDialog } from '@angular/material';
-import { DialogClientForm } from '../shared/modals/dialogClientForm';
-import { ConfirmClientDialog } from '../shared/modals/confirmClient';
+import { ClientFormDialog } from '../shared/modals/client/client.form.dialog';
+import { ConfirmClientDialog } from '../shared/modals/client/confirm.client.dialog';
 import { FilterDataTablePipe } from '../shared/pipes/filter-datatable.pipe';
 import { HidePasswordPipe } from '../shared/pipes/hide-password.pipe';
 
@@ -39,14 +39,14 @@ export class ClientsComponent implements OnInit {
 
 	private onSave() {
 				this.sharedService.data = null;
-        const dialogRef = this.dialog.open(DialogClientForm, {
+        const dialogRef = this.dialog.open(ClientFormDialog, {
             height: '600px',
             width: '400px'
         });
   }
 
   private onEdit(client: Client) {
-        const dialogRef = this.dialog.open(DialogClientForm, {
+        const dialogRef = this.dialog.open(ClientFormDialog, {
             height: '600px',
             width: '400px',
             data: {
